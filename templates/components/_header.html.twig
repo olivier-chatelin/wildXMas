@@ -1,0 +1,8 @@
+<h1>Hello {{ app.user?app.user.email:"instructor" }}</h1>
+<p>roles:
+    {% if app.user %}
+        {% for role in app.user.roles  %}
+            {{ role }}
+        {% endfor %}
+    {% endif %}
+</p>

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+{% block body %}
+{% include 'components/_header.html.twig' %}
+    <ul>
+    {% if "ROLE_SUPER_ADMIN" in app.user.roles %}
+        <li><a href="{{ path('admin_instructors') }}">Nommer Les Admin</a></li>
+    {% endif %}
+    </ul>
+
+{% endblock %}

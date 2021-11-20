@@ -113,6 +113,11 @@ class Instructor implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function addRoles(string $roles): self
+    {
+        $this->roles[] = $roles;
+        return $this;
+    }
 
     /**
      * @see PasswordAuthenticatedUserInterface
