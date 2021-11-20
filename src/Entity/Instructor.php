@@ -118,6 +118,13 @@ class Instructor implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles[] = $roles;
         return $this;
     }
+    public function removeRole(string $role): self
+    {
+        if(in_array($role,$this->getRoles())){
+            $this->setRoles(array_diff($this->getRoles(),[$role]));
+        }
+        return $this;
+    }
 
     /**
      * @see PasswordAuthenticatedUserInterface

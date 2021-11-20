@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Instructor;
+use App\Repository\InstructorRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,12 +22,27 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/", name="admin_instructors")
+     * @Route("/admin/instructors", name="admin_instructors")
      */
-    public function instructorsShow(): Response
+    public function instructorsShow(InstructorRepository $instructorRepository): Response
     {
+        $instructors = $instructorRepository->findAll();
         return $this->render('admin/instructors.html.twig', [
-            'controller_name' => 'AdminController',
+            'instructors' => $instructors,
         ]);
+    }
+    /**
+     * @Route("/admin/instructors/update/{id}", name="admin_instructor_update")
+     */
+    public function instructorsUpdate(Instructor $instructor, EntityManagerInterface $entityManager): Response
+    {
+        if(in_array("ROLE_ADMIN",$instructor->getRoles())) {
+            $instructor->removeRole("ROLE_ADMIN");
+        } else{
+            $instructor->addRoles("ROLE_ADMIN");
+        }
+        $entityManager->persist($instructor);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin_instructors');
     }
 }

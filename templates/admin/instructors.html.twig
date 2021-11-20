@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% include 'components/_header.html.twig' %}
+    <table>
+        <tr>
+            <th>email</th>
+            <th>admin</th>
+            <th>actions</th>
+        </tr>
+        {% for instructor in instructors %}
+            <tr>
+               <td>{{ instructor.email }}</td>
+               <td>
+                   {% if "ROLE_ADMIN" in instructor.roles %}
+                    oui
+                   {% else %}
+                       non
+                   {% endif %}
+               </td>
+                <td>
+                    <a href={{ path('admin_instructor_update',{id:instructor.id})}}>changer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
