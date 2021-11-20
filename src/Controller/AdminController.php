@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\AvailableDays;
 use App\Entity\Instructor;
+use App\Form\AvailableDatesFormType;
 use App\Repository\InstructorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -44,10 +47,5 @@ class AdminController extends AbstractController
         $entityManager->persist($instructor);
         $entityManager->flush();
         return $this->redirectToRoute('admin_instructors');
-    }
-    /**
-     * @Route("/admin/dates", name="admin_set_dates")
-     */
-    public function setDates(): Response{
     }
 }
