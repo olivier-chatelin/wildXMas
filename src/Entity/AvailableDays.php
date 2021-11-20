@@ -22,6 +22,11 @@ class AvailableDays
      */
     private $dateset = [];
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class AvailableDays
     public function setDateset(array $dateset): self
     {
         $this->dateset = $dateset;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

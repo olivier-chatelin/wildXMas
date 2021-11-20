@@ -45,4 +45,9 @@ class AdminController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('admin_instructors');
     }
+    /**
+     * @Route("/admin/dates", name="admin_set_dates")
+     */
+    public function setDates(): Response{
+    }
 }
