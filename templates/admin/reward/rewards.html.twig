@@ -3,7 +3,6 @@
 {% block title %}Hello HomeController!{% endblock %}
    {% block javascripts %}
        {{ parent() }}
-       {{ encore_entry_script_tags('interact') }}
        {{ encore_entry_script_tags('drag') }}
    {% endblock %}
 {% block body %}
@@ -17,9 +16,13 @@
         </div>
     </div>
     <div class="interact-zone d-flex">
-        <div class="reward-container d-flex flex-wrap w-50 align-self-start  dropzone align-items-start">
+        <div class="reward-container border d-flex flex-wrap w-50   dropzone " data-date=null>
             {% for reward in rewards %}
-                    <a class="link m-1" href={{ path('admin_reward_update',{id:reward.id}) }}>
+                    <a class="draggable link m-1"
+                       draggable="true"
+                       data-id={{ reward.id }}
+                        href={{ path('admin_reward_update',{id:reward.id}) }}
+                    >
                        <div class="reward-inlist ">
                             {% include 'components/_reward.html.twig' %}
                        </div>
@@ -28,7 +31,7 @@
                     No reward
             {% endfor %}
         </div>
-        <div class="dropzone w-50  date-container d-flex flex-wrap">
+        <div class="w-50  date-container d-flex flex-wrap">
             {% for i in range(start_date|date('U'), end_date|date('U'), 86400 ) %}
             <div class="reward-target  dropzone m-1" data-date={{ i|date('Y-m-d') }}>
                 <div class="border landing ">

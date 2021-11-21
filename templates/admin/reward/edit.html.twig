@@ -11,7 +11,7 @@
         <div class="d-flex justify-content-around align-items-center" >
             <div class="d-flex flex-column align-items-start">
                 <h1>Update Reward</h1>
-                {{ include('admin/reward/_form.html.twig') }}
+                {{ include('admin/reward/_form.html.twig', {'button_label': 'Update'}) }}
                 <a class="btn btn-gold  text-white m-1" href="{{ path('admin_rewards') }}">Back to list</a>
                 {{ include('admin/reward/_delete_form.html.twig') }}
             </div>

@@ -1,9 +1,10 @@
 <div class="reward draggable"
-     draggable="true"
-     data-origin-id="0"
-     data-destination-id="0"
-     data-date=null
-     data-id={{ reward.id }}>
+{#     draggable="true"#}
+{#     data-origin-id="0"#}
+{#     data-destination-id="0"#}
+{#     data-date=null#}
+{#     data-id={{ reward.id }}#}
+>
     {% if  display_tags %}
         <div class="legend ">
                 <span id="goodTag" class={{ reward.isGood?"goodTag":"evilTag" }}></span>
@@ -11,7 +12,8 @@
                 <span id="languageTag" class={{ reward.isFrench?"frenchTag":"englishTag" }}></span>
         </div>
     {% endif %}
-    <h5 class="reward-date m-1">{{ reward.scheduledAt?reward.scheduledAt|date("l F \\t\\h\\e d")|trans}}</h5>
+{#    <h5 class="reward-date m-1">{{ reward.scheduledAt?reward.scheduledAt|date("l F \\t\\h\\e d")|trans}}</h5>#}
+    <h5 class="reward-date m-1"></h5>
     <div id="reward-img" class="reward-img" style="background-image: url({{ reward.url }})"></div>
     <span id="reward-title" class="reward-title m-1">{{ reward.title|upper }}</span>
 </div>

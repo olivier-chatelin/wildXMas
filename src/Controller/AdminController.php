@@ -113,6 +113,22 @@ class AdminController extends AbstractController
         ]);
     }
     /**
+    * @Route("admin/updateDate", name="admin_reward_date_update", methods={"POST"})
+    */
+    public function updateDate(Request $request, EntityManagerInterface $entityManager, RewardRepository $rewardRepository): Response
+    {
+        $post = (json_decode($request->getContent()));
+        $rewardId = (int)$post->rewardId;
+        $date = $post->date;
+        $reward = $rewardRepository->findOneBy(["id"=>$rewardId]);
+        $dateTime = $date === "null" ?null:new \DateTime($date);
+        $reward->setScheduledAt($dateTime);
+        $entityManager->persist($reward);
+        $entityManager->flush();
+        dd($reward);
+        return $this->redirectToRoute('admin_rewards', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
     * @Route("admin/{id}", name="admin_reward_delete", methods={"POST"})
     */
     public function delete(Request $request, Reward $reward, EntityManagerInterface $entityManager): Response

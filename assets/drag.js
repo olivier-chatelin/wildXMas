@@ -2,25 +2,21 @@
 let dragged;
 const dropZones = document.getElementsByClassName('dropzone');
 const draggables = document.getElementsByClassName('draggable');
-console.log('dropzones',dropZones);
-console.log('draggables',draggables);
 const dragStart = (event) => {
     dragged = event.target;
-    console.log("élément attrapé");
-    dragged.dataset.originId = dragged.parentNode.dataset.id;
+    console.log("élément attrapé", dragged);
+    // dragged.dataset.originId = dragged.parentNode.dataset.id;
 
 }
 
 const dragEnter = (event) => {
     if (event.target.classList.contains("dropzone")){
         event.target.classList.add("selected");
-        console.log('event target',event.target.classList);
     }
 }
 const dragLeave = (event) => {
     if(event.target.classList.contains("dropzone")) {
         event.target.classList.remove("selected");
-        console.log('event target leave',event.target.classList);
     }
 }
 const dragOver = (event) => {
@@ -28,7 +24,7 @@ const dragOver = (event) => {
     // Empêche default d'autoriser le drop
 }
 const dragEnd = (event) => {
-    console.log("élément lâché");
+    console.log("élément lâché",event.target);
 }
 const drop = (event) => {
     event.preventDefault();
@@ -37,24 +33,20 @@ const drop = (event) => {
         event.target.appendChild(dragged);
         event.target.classList.remove('selected');
         dragged.classList.add('trembling');
-        dragged.dataset.destinationId = event.target.dataset.id;
-        console.log('id_dragged:',dragged.dataset.id);
-        console.log('id_origine:', dragged.dataset.originId);
-        console.log('id_destination:', dragged.dataset.destinationId);
+        dragged.dataset.date = event.target.dataset.date;
         //le fetch
-        // fetch('/meal',{
-        //     body: JSON.stringify({
-        //         idDragged: dragged.dataset.id,
-        //         idOrigin: dragged.dataset.originId,
-        //         idDestination:dragged.dataset.destinationId
-        //     }),
-        //     method:"POST",
-        //     headers: {
-        //         "Content-type": "application/json; charset=UTF-8"
-        //     }
-        // })
-        //     .then((response)=>response.json())
-        //     .then((data)=>console.log(data));
+        fetch('/admin/updateDate',{
+            body: JSON.stringify({
+                rewardId: dragged.dataset.id,
+                date: dragged.dataset.date,
+            }),
+            method:"POST",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then((response)=>response.json())
+            .then((data)=>console.log(data));
 
 
     }
