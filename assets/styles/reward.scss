@@ -12,9 +12,9 @@
 
 }
 .reward-alone{
-  width: 250px;
-  height: 250px;
-  font-size: 18px;
+  width: 400px;
+  height: 400px;
+  font-size: 36px;
 }
 .reward{
   position: relative;
@@ -51,10 +51,11 @@
   color:white;
   font-size: 0.8em;
 }
-#languageTag, #remoteTag{
+#languageTag, #remoteTag, #goodTag{
   display: inline-block;
-  height: 14px;
-  width: 14px;
+  height: 1em;
+  width: 1em;
+  background-size: cover;
 }
 .frenchTag{
   background-image: url("../images/french.png");
@@ -67,5 +68,11 @@
 }
 .presenceTag{
   background-image: url("../images/here.png");
+}
+.goodTag{
+  background-image: url("../images/good.png");
+}
+.evilTag{
+  background-image: url("../images/evil.png");
 }
 

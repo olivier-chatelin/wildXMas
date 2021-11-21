@@ -80,7 +80,9 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_rewards',[],Response::HTTP_SEE_OTHER);
         }
         return $this->render('admin/reward/new.html.twig',[
-            'form'=>$form->createView(),
+            'form'=> $form->createView(),
+            'reward'=> $reward,
+            'display_tags' => true
         ]);
 
     }
@@ -101,6 +103,8 @@ class AdminController extends AbstractController
         return $this->renderForm('admin/reward/edit.html.twig', [
             'reward' => $reward,
             'form' => $form,
+            'display_tags' => true
+
         ]);
     }
     /**

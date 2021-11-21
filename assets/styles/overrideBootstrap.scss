@@ -4,6 +4,8 @@ $theme-colors: (
         "xMas":  #C30F16
 );
 $btn-active-bg-shade-amount: 50%;
+
+$component-active-bg: #FC686D;
 @import "~bootstrap/scss/bootstrap";
 .link{
   text-decoration: none;
@@ -12,4 +14,8 @@ $btn-active-bg-shade-amount: 50%;
 .link:hover{
   color: black;
 
+}
+body{
+  //background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/christmas-background-design-of-pine-tree-and-mountain-with-snow-natee-srisuk.jpg");
+  background-size: cover;
 }

@@ -1,11 +1,12 @@
 <div class="reward m-2" data-id={{ reward.id }}>
     {% if  display_tags %}
         <div class="legend ">
+                <span id="goodTag" class={{ reward.isGood?"goodTag":"evilTag" }}></span>
                 <span id="remoteTag" class={{ reward.isRemoteFriendly?"remoteTag":"presenceTag" }}></span>
                 <span id="languageTag" class={{ reward.isFrench?"frenchTag":"englishTag" }}></span>
         </div>
     {% endif %}
     <h5 class="reward-date m-1">{{ reward.scheduledAt?reward.scheduledAt|date("l F \\t\\h\\e d")|trans}}</h5>
-    <div class="reward-img" style="background-image: url({{ reward.url }})"></div>
-    <span class="reward-title m-1">{{ reward.title|upper }}</span>
+    <div id="reward-img" class="reward-img" style="background-image: url({{ reward.url }})"></div>
+    <span id="reward-title" class="reward-title m-1">{{ reward.title|upper }}</span>
 </div>
