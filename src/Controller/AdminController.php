@@ -9,12 +9,14 @@ use App\Form\AvailableDatesFormType;
 use App\Form\RewardType;
 use App\Repository\InstructorRepository;
 use App\Repository\RewardRepository;
+use Cassandra\Timestamp;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 
 class AdminController extends AbstractController
 {
@@ -58,10 +60,14 @@ class AdminController extends AbstractController
     public function rewardShow( InstructorRepository $instructorRepository): Response
     {
         $rewards = $this->getUser()->getRewards();
-
+        $christmasEve = date("Y") . "-12-24";
+        $firstDecember = date("Y") . "-12-01";
         return $this->render('admin/reward/rewards.html.twig',[
             'rewards'=>$rewards,
-            'display_tags'=>true
+            'display_tags'=>true,
+            'end_date'=>$christmasEve,
+            'start_date'=>$firstDecember,
+
         ]);
 
     }
@@ -99,11 +105,10 @@ class AdminController extends AbstractController
 
             return $this->redirectToRoute('admin_rewards', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->renderForm('admin/reward/edit.html.twig', [
             'reward' => $reward,
             'form' => $form,
-            'display_tags' => true
+            'display_tags' => true,
 
         ]);
     }

@@ -4,10 +4,16 @@
 
 {% block body %}
     {% include 'components/_header.html.twig' %}
-
-    <a class="btn btn-primary text-white" href={{ path('admin_reward_new')}} >New Reward</a>
+    <div class="d-flex">
+        <div class="w-50">
+            <a class="btn btn-primary text-white" href={{ path('admin_reward_new')}} >New Reward</a>
+        </div>
+        <div class="w-50">
+            <h2>December</h2>
+        </div>
+    </div>
     <div class="interact-zone d-flex">
-        <div class="reward-container d-flex flex-wrap w-50 border">
+        <div class="reward-container d-flex flex-wrap w-50 ">
             {% for reward in rewards %}
             <a class="link" href={{ path('admin_reward_update',{id:reward.id}) }}>
                <div class="reward-inlist m-1">
@@ -18,8 +24,12 @@
                 No reward
             {% endfor %}
         </div>
-        <div class="dropzone w-50 border">
-
+        <div class="dropzone w-50  d-flex flex-wrap">
+            {% for i in range(start_date|date('U'), end_date|date('U'), 86400 ) %}
+            <div class="reward-target border">
+                <h5 class="text-center" data-date={{ i|date('Y-m-d') }}>{{ i|date('l d') }}</h5>
+            </div>
+            {% endfor %}
         </div>
     </div>
 
