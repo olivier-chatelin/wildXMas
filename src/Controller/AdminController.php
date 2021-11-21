@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\AvailableDays;
 use App\Entity\Instructor;
+use App\Entity\Reward;
 use App\Form\AvailableDatesFormType;
+use App\Form\RewardType;
 use App\Repository\InstructorRepository;
+use App\Repository\RewardRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,5 +50,36 @@ class AdminController extends AbstractController
         $entityManager->persist($instructor);
         $entityManager->flush();
         return $this->redirectToRoute('admin_instructors');
+    }
+    /**
+     * @Route("/admin/rewards", name="admin_rewards")
+     */
+    public function rewardShow( InstructorRepository $instructorRepository): Response
+    {
+        $rewards = $this->getUser()->getRewards();
+
+        return $this->render('admin/reward/rewards.html.twig',[
+            'rewards'=>$rewards
+        ]);
+
+    }
+    /**
+     * @Route("/admin/reward/new", name="admin_reward_new")
+     */
+    public function rewardNew(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $reward = new Reward();
+        $form = $this->createForm(RewardType::class, $reward);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $reward->addInstructor($this->getUser());
+            $entityManager->persist($reward);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_rewards');
+        }
+        return $this->render('admin/reward/new.html.twig',[
+            'form'=>$form->createView(),
+        ]);
+
     }
 }

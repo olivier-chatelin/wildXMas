@@ -32,12 +32,12 @@ class Reward
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isGood;
+    private $isGood = true;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isRemoteFriendly;
+    private $isRemoteFriendly = true;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -53,6 +53,11 @@ class Reward
      * @ORM\ManyToMany(targetEntity=Instructor::class, mappedBy="rewards")
      */
     private $instructors;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFrench = true;
 
     public function __construct()
     {
@@ -175,6 +180,18 @@ class Reward
         if ($this->instructors->removeElement($instructor)) {
             $instructor->removeReward($this);
         }
+
+        return $this;
+    }
+
+    public function getIsFrench(): ?bool
+    {
+        return $this->isFrench;
+    }
+
+    public function setIsFrench(bool $isFrench): self
+    {
+        $this->isFrench = $isFrench;
 
         return $this;
     }

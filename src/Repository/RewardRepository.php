@@ -22,19 +22,15 @@ class RewardRepository extends ServiceEntityRepository
     // /**
     //  * @return Reward[] Returns an array of Reward objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function findByInstructor($instructor)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('r.instructor = :val')
+            ->setParameter('val', $instructor)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Reward

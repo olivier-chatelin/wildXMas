@@ -54,6 +54,11 @@ class Instructor implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $rewards;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFrench =true;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
@@ -223,6 +228,18 @@ class Instructor implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeReward(Reward $reward): self
     {
         $this->rewards->removeElement($reward);
+
+        return $this;
+    }
+
+    public function getIsFrench(): ?bool
+    {
+        return $this->isFrench;
+    }
+
+    public function setIsFrench(bool $isFrench): self
+    {
+        $this->isFrench = $isFrench;
 
         return $this;
     }

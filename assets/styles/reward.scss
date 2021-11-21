@@ -1,0 +1,41 @@
+.interact-zone{
+}
+.legend{
+  position: absolute;
+}
+.reward{
+  position: relative;
+  box-shadow: 9px 11px 13px -4px #000000;
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: 150px;
+  font-size: 10px;
+  background-image: url("../images/reward-background.png");
+  background-size: cover;
+  }
+.reward-date{
+  text-align: center;
+  font-weight: bold;
+  color: #594a4c;
+  font-size: 1em;
+}
+.reward-img{
+  align-self: center;
+  width: 50%;
+  height: 50%;
+  border: 3px solid #594a4c;
+  border-radius: 15%;
+  background-size: cover;
+  background-position: center;
+
+}
+.reward-title{
+  text-align: center;
+  font-weight: bold;
+  background-color: #594a4c;
+  color:white;
+  font-size: 0.8em;
+}
+

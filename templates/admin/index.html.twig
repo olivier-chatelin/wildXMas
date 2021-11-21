@@ -7,7 +7,7 @@
     {% if "ROLE_SUPER_ADMIN" in app.user.roles %}
         <li><a href="{{ path('admin_instructors') }}">Nommer Les Admin</a></li>
     {% endif %}
-        <li><a href={{ path('admin_set_rewards') }}>Set Rewards</a></li>
+        <li><a href={{ path('admin_rewards') }}>Set Rewards</a></li>
     </ul>
     <a href="" class="btn btn-primary text-gold">Merry Christmas</a>
 {% endblock %}

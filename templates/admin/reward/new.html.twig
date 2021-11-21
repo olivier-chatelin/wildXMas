@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% include 'components/_header.html.twig' %}
+    <div class="container">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary text-gold">Add Reward</button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

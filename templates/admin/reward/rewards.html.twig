@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% include 'components/_header.html.twig' %}
+    <a class="btn btn-primary text-gold" href={{ path('admin_reward_new')}} >New Reward</a>
+    <div class="interact-zone d-flex">
+        <div class="reward-container d-flex flex-wrap w-50 border">
+            {% for reward in rewards %}
+                <div class="reward m-2" data-id={{ reward.id }}>
+                    <h5 class="reward-date m-1"></h5>
+                    <div class="reward-img" style="background-image: url({{ reward.url }})"></div>
+                    <span class="reward-title m-1">{{ reward.title|upper }}</span>
+                    <div class="legend">
+                        {{ reward.isRemoteFriendly? '<i class="fas fa-wifi"></i>':'<i class="fas fa-arrow-down"></i>'}}
+                        {% if reward.isFrench%}
+                        <img src={{ asset("build/images/french.png")}} alt="">
+                        {% else %}
+                        <img src={{ asset("build/images/english.png")}} alt="">
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                No reward
+            {% endfor %}
+        </div>
+        <div class="dropzone w-50 border">
+
+        </div>
+    </div>
+
+{% endblock %}
