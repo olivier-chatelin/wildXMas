@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello HomeController!{% endblock %}
-
+   {% block javascripts %}
+       {{ parent() }}
+       {{ encore_entry_script_tags('interact') }}
+       {{ encore_entry_script_tags('drag') }}
+   {% endblock %}
 {% block body %}
     {% include 'components/_header.html.twig' %}
     <div class="d-flex">
@@ -13,21 +17,23 @@
         </div>
     </div>
     <div class="interact-zone d-flex">
-        <div class="reward-container d-flex flex-wrap w-50 ">
+        <div class="reward-container d-flex flex-wrap w-50 align-self-start  dropzone align-items-start">
             {% for reward in rewards %}
-            <a class="link" href={{ path('admin_reward_update',{id:reward.id}) }}>
-               <div class="reward-inlist m-1">
-                    {% include 'components/_reward.html.twig' %}
-               </div>
-            </a>
+                    <a class="link m-1" href={{ path('admin_reward_update',{id:reward.id}) }}>
+                       <div class="reward-inlist ">
+                            {% include 'components/_reward.html.twig' %}
+                       </div>
+                    </a>
             {% else %}
-                No reward
+                    No reward
             {% endfor %}
         </div>
-        <div class="dropzone w-50  d-flex flex-wrap">
+        <div class="dropzone w-50  date-container d-flex flex-wrap">
             {% for i in range(start_date|date('U'), end_date|date('U'), 86400 ) %}
-            <div class="reward-target border">
-                <h5 class="text-center" data-date={{ i|date('Y-m-d') }}>{{ i|date('l d') }}</h5>
+            <div class="reward-target  dropzone m-1" data-date={{ i|date('Y-m-d') }}>
+                <div class="border landing ">
+                    <h5 class="date-title text-center" >{{ i|date('l d') }}</h5>
+                </div>
             </div>
             {% endfor %}
         </div>

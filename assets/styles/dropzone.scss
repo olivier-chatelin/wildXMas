@@ -1,4 +1,73 @@
 .reward-target{
-    width: 152px;
-    height: 152px;
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+.landing{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    z-index: -1;
+
+}
+.date-title{
+    position: absolute;
+}
+.reward-container{
+    align-self: flex-start;
+    justify-content: flex-start;
+}
+.date-container{
+    position: relative;
+}
+
+.container{
+
+    margin-top: 20px;
+}
+.selected{
+    background-color: #e7e4e4;
+}
+.dropzone{
+    min-height: 100px;
+    display: inline-block;
+}
+
+.draggable,
+.draggable * {
+    -ms-touch-action: none;
+    touch-action: none;
+}
+.main{
+    background-color: lightcoral;
+}
+.starter{
+    background-color: yellowgreen;
+}
+
+.trembling {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(0, -1px, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(0, 2px, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(0, -4px, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }

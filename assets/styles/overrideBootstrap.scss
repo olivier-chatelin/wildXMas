@@ -7,9 +7,16 @@ $btn-active-bg-shade-amount: 50%;
 
 $component-active-bg: #FC686D;
 @import "~bootstrap/scss/bootstrap";
+*{
+  margin: 0px;
+  padding: 0px;
+}
 .link{
   text-decoration: none;
   color: black;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
 }
 .link:hover{
   color: black;

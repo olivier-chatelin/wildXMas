@@ -27,6 +27,8 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('date', './assets/date.js')
     .addEntry('dynamic-input', './assets/dynamic-input.js')
+    .addEntry('interact', './assets/interact.js')
+    .addEntry('drag', './assets/drag.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
