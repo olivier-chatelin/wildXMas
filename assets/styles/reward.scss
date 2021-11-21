@@ -2,6 +2,8 @@
 }
 .legend{
   position: absolute;
+  left: 5px;
+  top: 5px;
 }
 .reward-inlist{
   width: 150px;
@@ -48,5 +50,22 @@
   background-color: #594a4c;
   color:white;
   font-size: 0.8em;
+}
+#languageTag, #remoteTag{
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+}
+.frenchTag{
+  background-image: url("../images/french.png");
+}
+.englishTag{
+  background-image: url("../images/english.png");
+}
+.remoteTag{
+  background-image: url("../images/remote.png");
+}
+.presenceTag{
+  background-image: url("../images/here.png");
 }
 

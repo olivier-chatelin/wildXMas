@@ -60,7 +60,8 @@ class AdminController extends AbstractController
         $rewards = $this->getUser()->getRewards();
 
         return $this->render('admin/reward/rewards.html.twig',[
-            'rewards'=>$rewards
+            'rewards'=>$rewards,
+            'display_tags'=>true
         ]);
 
     }
