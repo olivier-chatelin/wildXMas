@@ -59,11 +59,21 @@ class AdminController extends AbstractController
      */
     public function rewardShow( InstructorRepository $instructorRepository): Response
     {
-        $rewards = $this->getUser()->getRewards();
+        $allRewards = $this->getUser()->getRewards();
+        $rewards =[];
+        $scheduledRewards = [];
+        foreach ($allRewards as $reward) {
+            if ($reward->getScheduledAt()) {
+                $scheduledRewards[] = $reward;
+            } else{
+                $rewards[] = $reward;
+            };
+        }
         $christmasEve = date("Y") . "-12-24";
         $firstDecember = date("Y") . "-12-01";
         return $this->render('admin/reward/rewards.html.twig',[
             'rewards'=>$rewards,
+            'scheduled_rewards'=>$scheduledRewards,
             'display_tags'=>true,
             'end_date'=>$christmasEve,
             'start_date'=>$firstDecember,

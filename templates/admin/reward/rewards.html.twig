@@ -37,6 +37,13 @@
                 <div class="border landing ">
                     <h5 class="date-title text-center" >{{ i|date('l d') }}</h5>
                 </div>
+                    {% for reward in scheduled_rewards %}
+                        {% if reward.scheduledAt|date('Y-m-d') == i|date('Y-m-d') %}
+                            <div class="reward-inlist ">
+                                {% include 'components/_reward.html.twig' %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
             </div>
             {% endfor %}
         </div>
