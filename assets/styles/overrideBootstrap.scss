@@ -1,6 +1,15 @@
 $theme-colors: (
-        "primary": #b11e31,
+        "primary": #FC686D,
         "gold": #E0AA3E,
+        "xMas":  #C30F16
 );
 $btn-active-bg-shade-amount: 50%;
 @import "~bootstrap/scss/bootstrap";
+.link{
+  text-decoration: none;
+  color: black;
+}
+.link:hover{
+  color: black;
+
+}

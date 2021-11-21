@@ -1,4 +1,17 @@
 .idea
+src/Controller/RewardController.php
+src/Form/Reward1Type.php
+templates/reward/_delete_form.html.twig
+templates/reward/_form.html.twig
+templates/reward/edit.html.twig
+templates/reward/index.html.twig
+templates/reward/new.html.twig
+templates/reward/show.html.twig
+
+
+
+
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

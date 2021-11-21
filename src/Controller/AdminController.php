@@ -20,6 +20,7 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(): Response
     {
@@ -75,11 +76,43 @@ class AdminController extends AbstractController
             $reward->addInstructor($this->getUser());
             $entityManager->persist($reward);
             $entityManager->flush();
-            return $this->redirectToRoute('admin_rewards');
+            return $this->redirectToRoute('admin_rewards',[],Response::HTTP_SEE_OTHER);
         }
         return $this->render('admin/reward/new.html.twig',[
             'form'=>$form->createView(),
         ]);
 
     }
+    /**
+     * @Route("/admin/reward/update/{id}", name="admin_reward_update")
+     */
+    public function rewardUpdate(Reward $reward,Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RewardType::class, $reward);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_rewards', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/reward/edit.html.twig', [
+            'reward' => $reward,
+            'form' => $form,
+        ]);
+    }
+    /**
+    * @Route("admin/{id}", name="admin_reward_delete", methods={"POST"})
+    */
+    public function delete(Request $request, Reward $reward, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$reward->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($reward);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_rewards', [], Response::HTTP_SEE_OTHER);
+    }
+
 }

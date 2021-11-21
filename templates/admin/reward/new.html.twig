@@ -1,14 +1,11 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
 {% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
     {% include 'components/_header.html.twig' %}
     <div class="container">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-primary text-gold">Add Reward</button>
-        {{ form_end(form) }}
+        <h1>Create new Reward</h1>
+        <a class="btn btn-gold m-1 text-white" href="{{ path('admin_rewards') }}">Back to list</a>
+        {{ include('admin/reward/_form.html.twig') }}
     </div>
 
 {% endblock %}

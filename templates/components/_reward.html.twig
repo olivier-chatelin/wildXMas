@@ -1,0 +1,16 @@
+<div class="reward m-2" data-id={{ reward.id }}>
+    <h5 class="reward-date m-1">{{ reward.scheduledAt?reward.scheduledAt|date("l F \\t\\h\\e d")|trans}}</h5>
+    <div class="reward-img" style="background-image: url({{ reward.url }})"></div>
+    <span class="reward-title m-1">{{ reward.title|upper }}</span>
+
+    {% if not reward.scheduledAt %}
+        <div class="legend">
+            {{ reward.isRemoteFriendly ? '<i class="fas fa-wifi"></i>':'<i class="fas fa-arrow-down"></i>'}}
+            {% if reward.isFrench %}
+                <img src={{ asset("build/images/french.png")}} alt="french">
+            {% else %}
+                <img src={{ asset("build/images/english.png")}} alt="english">
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
