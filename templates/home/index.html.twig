@@ -8,6 +8,9 @@
     <li><a href={{ path('app_login')}}>Login</a></li>
     <li><a href={{ path('app_logout')}}>Logout</a></li>
     <li><a href={{ path('app_register') }}>Register</a></li>
+    {% if app.user %}
+    <li><a href={{ path('rewards') }}>Rewards</a></li>
+    {% endif %}
     {% if app.user and "ROLE_ADMIN" in app.user.roles %}
         <li><a href={{ path('admin') }}>Admin</a></li>
     {% endif %}

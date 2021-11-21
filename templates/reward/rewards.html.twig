@@ -9,7 +9,7 @@
     {% include 'components/_header.html.twig' %}
     <div class="d-flex">
         <div class="w-50">
-            <a class="btn btn-primary text-white" href={{ path('admin_reward_new')}} >New Reward</a>
+            <a class="btn btn-primary text-white" href={{ path('reward_new')}} >New Reward</a>
         </div>
         <div class="w-50">
             <h2>December</h2>
@@ -21,7 +21,7 @@
                     <a class="draggable link m-1"
                        draggable="true"
                        data-id={{ reward.id }}
-                        href={{ path('admin_reward_update',{id:reward.id}) }}
+                        href={{ path('reward_update',{id:reward.id}) }}
                     >
                        <div class="reward-inlist ">
                             {% include 'components/_reward.html.twig' %}
@@ -47,8 +47,9 @@
             </div>
             {% endfor %}
             <div class="d-flex flex-column">
-
-            <a href="{{ path("admin_export_fr_reg") }}" class="btn btn-xMas">Export for French regular curriculum</a>
+                {% if app.user and "ROLE_ADMIN" in app.user.roles %}
+                <a href="{{ path("admin_export_fr_reg") }}" class="btn btn-xMas">Export for French regular curriculum</a>
+                {% endif %}
             </div>
         </div>
     </div>

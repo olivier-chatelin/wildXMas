@@ -4,8 +4,6 @@ const dropZones = document.getElementsByClassName('dropzone');
 const draggables = document.getElementsByClassName('draggable');
 const dragStart = (event) => {
     dragged = event.target;
-    console.log("élément attrapé", dragged);
-    // dragged.dataset.originId = dragged.parentNode.dataset.id;
 
 }
 
@@ -23,9 +21,7 @@ const dragOver = (event) => {
     event.preventDefault();
     // Empêche default d'autoriser le drop
 }
-const dragEnd = (event) => {
-    console.log("élément lâché",event.target);
-}
+
 const drop = (event) => {
     event.preventDefault();
     if (event.target.classList.contains("dropzone")){
@@ -35,7 +31,7 @@ const drop = (event) => {
         dragged.classList.add('trembling');
         dragged.dataset.date = event.target.dataset.date;
         //le fetch
-        fetch('/admin/updateDate',{
+        fetch('/reward/updateDate',{
             body: JSON.stringify({
                 rewardId: dragged.dataset.id,
                 date: dragged.dataset.date,
@@ -60,7 +56,6 @@ for (const dropZone of dropZones) {
 }
 
 document.addEventListener('dragstart', dragStart);
-document.addEventListener('dragend',dragEnd);
 document.addEventListener('drop', drop);
 
 

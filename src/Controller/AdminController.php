@@ -16,7 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
 
 class AdminController extends AbstractController
 {
@@ -54,101 +53,6 @@ class AdminController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('admin_instructors');
     }
-    /**
-     * @Route("/admin/rewards", name="admin_rewards")
-     */
-    public function rewardShow( InstructorRepository $instructorRepository): Response
-    {
-        $allRewards = $this->getUser()->getRewards();
-        $rewards =[];
-        $scheduledRewards = [];
-        foreach ($allRewards as $reward) {
-            if ($reward->getScheduledAt()) {
-                $scheduledRewards[] = $reward;
-            } else{
-                $rewards[] = $reward;
-            };
-        }
-        $christmasEve = date("Y") . "-12-24";
-        $firstDecember = date("Y") . "-12-01";
-        return $this->render('admin/reward/rewards.html.twig',[
-            'rewards'=>$rewards,
-            'scheduled_rewards'=>$scheduledRewards,
-            'display_tags'=>true,
-            'end_date'=>$christmasEve,
-            'start_date'=>$firstDecember,
 
-        ]);
-
-    }
-    /**
-     * @Route("/admin/reward/new", name="admin_reward_new")
-     */
-    public function rewardNew(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $reward = new Reward();
-        $form = $this->createForm(RewardType::class, $reward);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $reward->addInstructor($this->getUser());
-            $entityManager->persist($reward);
-            $entityManager->flush();
-            return $this->redirectToRoute('admin_rewards',[],Response::HTTP_SEE_OTHER);
-        }
-        return $this->render('admin/reward/new.html.twig',[
-            'form'=> $form->createView(),
-            'reward'=> $reward,
-            'display_tags' => true
-        ]);
-
-    }
-    /**
-     * @Route("/admin/reward/update/{id}", name="admin_reward_update")
-     */
-    public function rewardUpdate(Reward $reward,Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(RewardType::class, $reward);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_rewards', [], Response::HTTP_SEE_OTHER);
-        }
-        return $this->renderForm('admin/reward/edit.html.twig', [
-            'reward' => $reward,
-            'form' => $form,
-            'display_tags' => true,
-
-        ]);
-    }
-    /**
-    * @Route("admin/updateDate", name="admin_reward_date_update", methods={"POST"})
-    */
-    public function updateDate(Request $request, EntityManagerInterface $entityManager, RewardRepository $rewardRepository): Response
-    {
-        $post = (json_decode($request->getContent()));
-        $rewardId = (int)$post->rewardId;
-        $date = $post->date;
-        $reward = $rewardRepository->findOneBy(["id"=>$rewardId]);
-        $dateTime = $date === "null" ?null:new \DateTime($date);
-        $reward->setScheduledAt($dateTime);
-        $entityManager->persist($reward);
-        $entityManager->flush();
-        dd($reward);
-        return $this->redirectToRoute('admin_rewards', [], Response::HTTP_SEE_OTHER);
-    }
-    /**
-    * @Route("admin/{id}", name="admin_reward_delete", methods={"POST"})
-    */
-    public function delete(Request $request, Reward $reward, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$reward->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($reward);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('admin_rewards', [], Response::HTTP_SEE_OTHER);
-    }
 
 }

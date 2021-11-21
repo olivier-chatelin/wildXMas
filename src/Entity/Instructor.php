@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\DefaultRewardRepository;
 use App\Repository\InstructorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -63,6 +64,7 @@ class Instructor implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->students = new ArrayCollection();
         $this->rewards = new ArrayCollection();
+
     }
 
     public function getId(): ?int
