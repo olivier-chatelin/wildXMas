@@ -16,7 +16,7 @@
                 {{ include('reward/_delete_form.html.twig') }}
             </div>
             <div class="align-self-center reward-alone m-1">
-                {% include 'components/_reward.html.twig' %}
+                {{  include ('components/_reward.html.twig',{'size':'large','update':false}) }}
             </div>
         </div>
     </div>

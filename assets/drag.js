@@ -4,6 +4,7 @@ const dropZones = document.getElementsByClassName('dropzone');
 const draggables = document.getElementsByClassName('draggable');
 const dragStart = (event) => {
     dragged = event.target;
+    console.log('dragged',dragged)
 
 }
 
@@ -26,6 +27,7 @@ const drop = (event) => {
     event.preventDefault();
     if (event.target.classList.contains("dropzone")){
         dragged.parentNode.removeChild(dragged);
+        let container = document.createElement('div');
         event.target.appendChild(dragged);
         event.target.classList.remove('selected');
         dragged.classList.add('trembling');

@@ -18,17 +18,7 @@
     <div class="interact-zone d-flex">
         <div class="reward-container border d-flex flex-wrap w-50   dropzone " data-date=null>
             {% for reward in rewards %}
-                    <a class="draggable link m-1"
-                       draggable="true"
-                       data-id={{ reward.id }}
-                        href={{ path('reward_update',{id:reward.id}) }}
-                    >
-                       <div class="reward-inlist ">
-                            {% include 'components/_reward.html.twig' %}
-                       </div>
-                    </a>
-            {% else %}
-                    No reward
+                    {{   include ('components/_reward.html.twig',{'update':true})}}
             {% endfor %}
         </div>
         <div class="w-50  date-container d-flex flex-wrap">
@@ -39,9 +29,7 @@
                 </div>
                     {% for reward in scheduled_rewards %}
                         {% if reward.scheduledAt|date('Y-m-d') == i|date('Y-m-d') %}
-                            <div class="reward-inlist ">
-                                {% include 'components/_reward.html.twig' %}
-                            </div>
+                                {{   include ('components/_reward.html.twig',{'update':true})}}
                         {% endif %}
                     {% endfor %}
             </div>
