@@ -40,11 +40,10 @@ class DefaultTableController extends AbstractController
                 $clonedReward = clone $reward;
                 $entityManager->persist($clonedReward);
                 $defaultTable->addReward($clonedReward);
+                $entityManager->persist($defaultTable);
             }
-            $entityManager->persist($defaultTable);
-            $entityManager->flush();
         }
-
+            $entityManager->flush();
         if (empty($errors)) {
             $this->addFlash('success','Rewards were successfully exported to instructors');
         }

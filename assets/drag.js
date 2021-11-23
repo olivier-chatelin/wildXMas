@@ -33,7 +33,7 @@ const drop = (event) => {
         dragged.classList.add('trembling');
         dragged.dataset.date = event.target.dataset.date;
         //le fetch
-        fetch('/reward/updateDate',{
+        fetch('/rewards/updateDate',{
             body: JSON.stringify({
                 rewardId: dragged.dataset.id,
                 date: dragged.dataset.date,
