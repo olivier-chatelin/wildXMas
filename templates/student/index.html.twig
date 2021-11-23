@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Student index{% endblock %}
+
+{% block body %}
+    {% include 'components/_header.html.twig' %}
+<div class="container w-50">
+
+    <h1>{{ app.user.email|split('.')[0]|capitalize}} 's students</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.firstname }}</td>
+                <td>{{ student.lastname }}</td>
+                <td class="d-flex">
+                    {{ include('student/_delete_form.html.twig') }}
+
+                    <a class="btn btn-primary text-white m-1" href="{{ path('student_edit', {'id': student.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success text-white m-1" href="{{ path('student_new') }}">Create new</a>
+</div>
+{% endblock %}

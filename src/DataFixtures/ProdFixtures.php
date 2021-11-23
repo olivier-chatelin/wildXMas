@@ -21,6 +21,14 @@ class ProdFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $olivier = new Instructor();
+        $olivier->setEmail('olivier.chatelin@wildcodeschool.com');
+        $olivier->setIsFrench(true);
+        $olivier->setIsRemote(false);
+        $olivier->setPassword($this->encoder->encodePassword($olivier, '123456'));
+        $olivier->addRoles('ROLE_USER');
+        $manager->persist($olivier);
+
         $superAdmin = new Instructor();
         $superAdmin->setEmail('camille.sabatier@wildcodeschool.com');
         $superAdmin->setPassword($this->encoder->encodePassword($superAdmin, 'JULc2la2mer'));
@@ -35,6 +43,7 @@ class ProdFixtures extends Fixture
         $instructor->setPassword($this->encoder->encodePassword($instructor, '123456'));
         $instructor->addRoles('ROLE_USER');
         $manager->persist($instructor);
+
 
         $instructor = new Instructor();
         $instructor->setEmail('fr-reg@gmail.com');
