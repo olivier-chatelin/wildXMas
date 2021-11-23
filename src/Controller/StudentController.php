@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\CsvFile;
 use App\Entity\Student;
+use App\Form\CsvFileType;
 use App\Form\StudentType;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,12 +19,58 @@ use Symfony\Component\Routing\Annotation\Route;
 class StudentController extends AbstractController
 {
     /**
-     * @Route("/", name="student_index", methods={"GET"})
+     * @Route("/", name="student_index", methods={"GET", "POST"})
      */
-    public function index(StudentRepository $studentRepository): Response
+    public function index(Request $request, StudentRepository $studentRepository, EntityManagerInterface $entityManager): Response
     {
+        $csvFile = new CsvFile();
+        $form = $this->createForm(CsvFileType::class,$csvFile);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($csvFile);
+            $this->getUser()->setCsvFile($csvFile);
+            $entityManager->flush();
+            $this->addFlash('success','Your file has been uploaded');
+            $students = $studentRepository->findAll();
+            foreach ($students as $student){
+                $entityManager->remove($student);
+            }
+            if (($fp = fopen("uploads/csv/users/" . $csvFile->getCsv(), "r"))) {
+                $line = 0;
+                while (($row = fgetcsv($fp))) {
+                    $line ++;
+                    if($line === 1 ) {
+                        foreach ($row as $key => $label) {
+                           switch ($label) {
+                               case 'firstname':
+                                   $keyFirstname = $key;
+                                   break;
+                               case 'lastname':
+                                   $KeyLastname = $key;
+                                   break;
+                               case 'wilder_email':
+                                   $keyEmail = $key;
+                                   break;
+                           }
+                        }
+                    } else{
+                        $student = new Student();
+                        $student->setFirstname($row[$keyFirstname]);
+                        $student->setLastname($row[$KeyLastname]);
+                        $student->setEmail($row[$keyEmail]);
+                        $student->setInstructor($this->getUser());
+                        $entityManager->persist($student);
+                    }
+                    $entityManager->flush();
+                }
+                fclose($fp);
+
+            }
+
+        }
         return $this->render('student/index.html.twig', [
             'students' => $studentRepository->findAll(),
+            'form' => $form->createView(),
         ]);
     }
 

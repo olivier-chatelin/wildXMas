@@ -60,6 +60,16 @@ class Instructor implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isFrench =true;
 
+    /**
+     * @ORM\OneToOne(targetEntity=CsvFile::class, cascade={"persist"})
+     */
+    private $csvFile;
+
+
+
+
+
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
@@ -245,4 +255,20 @@ class Instructor implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getCsvFile(): ?CsvFile
+    {
+        return $this->csvFile;
+    }
+
+    public function setCsvFile(?CsvFile $csvFile): self
+    {
+        $this->csvFile = $csvFile;
+
+        return $this;
+    }
+
+
+
+
 }
