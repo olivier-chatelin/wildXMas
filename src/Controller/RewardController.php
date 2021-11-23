@@ -32,6 +32,15 @@ class RewardController extends AbstractController
             if ($this->getUser()->getIsFrench() && !$this->getUser()->getIsRemote()) {
                 $dataSet = DefaultReward::FRENCH_REGULAR_CURRICULUM;
             }
+            if (!$this->getUser()->getIsFrench() && !$this->getUser()->getIsRemote()) {
+                $dataSet = DefaultReward::EUROPEAN_REGULAR_CURRICULUM;
+            }
+            if ($this->getUser()->getIsFrench() && $this->getUser()->getIsRemote()) {
+                $dataSet = DefaultReward::FRENCH_REMOTE_CURRICULUM;
+            }
+            if (!$this->getUser()->getIsFrench() && $this->getUser()->getIsRemote()) {
+                $dataSet = DefaultReward::EUROPEAN_REMOTE_CURRICULUM;
+            }
                 $data = $defaultRewardRepository->findOneBy(['name'=>$dataSet]);
                 foreach ($data->getRewards() as $reward) {
                     $clonedData = clone $reward;

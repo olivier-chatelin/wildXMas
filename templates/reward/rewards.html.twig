@@ -36,7 +36,10 @@
             {% endfor %}
             <div class="d-flex flex-column">
                 {% if app.user and "ROLE_ADMIN" in app.user.roles %}
-                <a href="{{ path("admin_export_fr_reg") }}" class="btn btn-xMas">Export for French regular curriculum</a>
+                <a href="{{ path("admin_export",{'name':'frReg'}) }}" class="btn btn-xMas">Export for French regular curriculum</a>
+                <a href="{{ path("admin_export",{'name':'frRem'}) }}" class="btn btn-gold">Export for French remote curriculum</a>
+                <a href="{{ path("admin_export",{'name':'eurReg'}) }}" class="btn btn-primary">Export for European regular curriculum</a>
+                <a href="{{ path("admin_export",{'name':'eurRem'}) }}" class="btn btn-success">Export for European remote curriculum</a>
                 {% endif %}
             </div>
         </div>
