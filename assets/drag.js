@@ -56,11 +56,15 @@ for (const dropZone of dropZones) {
     dropZone.addEventListener('dragleave', dragLeave);
     dropZone.addEventListener('dragover',dragOver);
 }
-
 document.addEventListener('dragstart', dragStart);
 document.addEventListener('drop', drop);
 
-
+const rewards = document.getElementsByClassName('reward');
+for (let reward of rewards) {
+reward.addEventListener('click', ()=>{
+    location.href = 'rewards/update/' + reward.dataset.id;
+})
+}
 
 
 

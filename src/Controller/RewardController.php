@@ -72,7 +72,7 @@ class RewardController extends AbstractController
 
     }
     /**
-     * @Route("/reward/new", name="reward_new")
+     * @Route("/rewards/new", name="reward_new")
      */
     public function rewardNew(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -93,7 +93,7 @@ class RewardController extends AbstractController
 
     }
     /**
-     * @Route("/reward/update/{id}", name="reward_update")
+     * @Route("/rewards/update/{id}", name="reward_update")
      */
     public function rewardUpdate(Reward $reward,Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -113,7 +113,7 @@ class RewardController extends AbstractController
         ]);
     }
     /**
-     * @Route("reward/updateDate", name="reward_date_update", methods={"POST"})
+     * @Route("rewards/updateDate", name="reward_date_update", methods={"POST"})
      */
     public function updateDate(Request $request, EntityManagerInterface $entityManager, RewardRepository $rewardRepository): Response
     {
@@ -128,7 +128,7 @@ class RewardController extends AbstractController
         return $this->json(['message'=>'reward updated']);
     }
     /**
-     * @Route("/reward/{id}", name="reward_delete", methods={"POST"})
+     * @Route("/rewards/{id}", name="reward_delete", methods={"POST"})
      */
     public function delete(Request $request, Reward $reward, EntityManagerInterface $entityManager): Response
     {

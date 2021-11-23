@@ -1,5 +1,6 @@
 .interact-zone{
 }
+
 .legend{
   position: absolute;
   left: 5px;
@@ -28,6 +29,7 @@
 }
 .reward{
   position: relative;
+  cursor: pointer;
 
   box-shadow: 9px 11px 13px -4px #000000;
   font-family: 'Outfit', sans-serif;

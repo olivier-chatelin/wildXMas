@@ -5,12 +5,11 @@
                     <span id="goodTag" class={{ reward.isGood?"goodTag":"evilTag" }}></span>
                     <span id="remoteTag" class={{ reward.isRemoteFriendly?"remoteTag":"presenceTag" }}></span>
                     <span id="languageTag" class={{ reward.isFrench?"frenchTag":"englishTag" }}></span>
-                {% if update %}
-                    <a class="link" href={{ path('reward_update',{id:reward.id}) }}>Update</a>
-                {% endif %}
             </div>
         {% endif %}
-    {#    <h5 class="reward-date m-1">{{ reward.scheduledAt?reward.scheduledAt|date("l F \\t\\h\\e d")|trans}}</h5>#}
+        {% if not display_tags %}
+        <h5 class="reward-date m-1">{{ reward.scheduledAt?reward.scheduledAt|date("l F \\t\\h\\e d")|trans}}</h5>
+        {% endif %}
         <h5 class="reward-date m-1"></h5>
         <div id="reward-img" class="reward-img" style="background-image: url({{ reward.url }})"></div>
         <span id="reward-title" class="reward-title m-1">{{ reward.title|upper }}</span>
