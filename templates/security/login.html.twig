@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
-
 {% block body %}
+ {% include 'components/_header.html.twig' %}
     <div class="container w-25">
 
 <form method="post">
@@ -25,9 +25,12 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-    <button class="btn btn-lg btn-primary m-1 text-white" type="submit">
-        Sign in
-    </button>
+    <div class="d-flex flex-column">
+        <button class="btn  btn-primary m-1 text-white w-25" type="submit">
+            Sign in
+        </button>
+        <a href={{ path('app_register') }}>Let's sign up</a>
+    </div>
 </form>
     </div>
 {% endblock %}

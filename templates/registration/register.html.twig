@@ -4,6 +4,8 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+    {% include 'components/_header.html.twig' %}
+
     <div class="container w-25">
         <h1>Register</h1>
         {{ form_start(registrationForm) }}

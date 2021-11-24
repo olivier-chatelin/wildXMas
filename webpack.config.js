@@ -28,6 +28,7 @@ Encore
     .addEntry('date', './assets/date.js')
     .addEntry('dynamic-input', './assets/dynamic-input.js')
     .addEntry('drag', './assets/drag.js')
+    .addEntry('wheel', './assets/wheel.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

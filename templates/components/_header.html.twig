@@ -1,9 +1,20 @@
 {% set arr = app.user?app.user.email|split('.'):["instructor"] %}
-<h1>Hello {{ arr[0]|capitalize}}</h1>
-<p>roles:
-    {% if app.user %}
-        {% for role in app.user.roles  %}
-            {{ role }}
-        {% endfor %}
-    {% endif %}
-</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success" >
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Wild Xmas</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                {% if app.user %}
+                <a class="nav-link active" href = {{ path('app_logout')}}>Hello {{ arr[0]|capitalize}}</a>
+                <a class="nav-link active" href={{ path('student_index') }}>Students</a>
+                <a class="nav-link active" href={{ path('rewards')}}>Rewards</a>
+                {% else %}
+                <a class="nav-link active" href={{ path('app_login')}}>Sign in/Sign up</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
