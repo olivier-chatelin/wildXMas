@@ -23,28 +23,9 @@
                     {{   include ('components/_reward.html.twig',{'update':true})}}
             {% endfor %}
         </div>
-        <div class="w-50  date-container d-flex flex-wrap">
-            {% for i in range(start_date|date('U'), end_date|date('U'), 86400 ) %}
-            <div class="reward-target  dropzone m-1" data-date={{ i|date('Y-m-d') }}>
-                <div class="border landing ">
-                    <h5 class="date-title text-center" >{{ i|date('l d') }}</h5>
-                </div>
-                    {% for reward in scheduled_rewards %}
-                        {% if reward.scheduledAt|date('Y-m-d') == i|date('Y-m-d') %}
-                                {%    include ('components/_reward.html.twig')%}
-                        {% endif %}
-                    {% endfor %}
-            </div>
-            {% endfor %}
-            <div class="d-flex flex-column">
-                {% if app.user and "ROLE_ADMIN" in app.user.roles %}
-                <a href="{{ path("admin_export",{'name':'frReg'}) }}" class="btn btn-xMas m-1">Export for French regular curriculum</a>
-                <a href="{{ path("admin_export",{'name':'frRem'}) }}" class="btn btn-gold m-1 text-white">Export for French remote curriculum</a>
-                <a href="{{ path("admin_export",{'name':'eurReg'}) }}" class="btn btn-primary m-1 text-white">Export for European regular curriculum</a>
-                <a href="{{ path("admin_export",{'name':'eurRem'}) }}" class="btn btn-success m-1 text-white">Export for European remote curriculum</a>
-                {% endif %}
-            </div>
-        </div>
+                    {%    include ('components/_calendar.html.twig') %}
+
+
     </div>
 
 </div>

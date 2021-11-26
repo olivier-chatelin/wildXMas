@@ -8,5 +8,31 @@
 {% block body %}
     {% include 'components/_header.html.twig' %}
 
-{#    wheel#}
+
+    {#    wheel#}
+    <div class="container-fluid d-flex">
+        <div class="w-50">
+            <div class="d-flex align-items-center m-5 ">
+                {% if app.user %}
+                <canvas id="can" ></canvas>
+                <div id="cursor"></div>
+                {% else %}
+                <h2>No Student, no wheel</h2>
+                {% endif %}
+            </div>
+            <div class="btn btn-lg btn-success text-white" id="spinTrigger">SPIN</div>
+            {% for student in students %}
+                <div class="student " data-name={{ student.firstname }}.{{ student.lastname|first }} data-id={{ student.id }}></div>
+            {% endfor %}
+        </div>
+        {% include 'components/_calendar.html.twig' %}
+    </div>
+    <div id="nameModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

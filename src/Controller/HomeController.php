@@ -14,14 +14,33 @@ class HomeController extends AbstractController
      */
     public function index(StudentRepository $studentRepository): Response
     {
-        $students = [];
+
+        $eligibleStudents = [];
+        $studentDisplayName = [];
+        $scheduledRewards = [];
         if($this->getUser()) {
-            $students = $this->getUser()->getStudents();
+            $allStudents = $this->getUser()->getStudents();
+            foreach ($allStudents as $student) {
+                dump(count($student->getRewards()));
+                if(count($student->getRewards()) === 0) {
+                    $eligibleStudents[] = $student;
+                }
+            }
+            foreach ($this->getUser()->getRewards() as $reward) {
+                if($reward->getScheduledAt()) {
+                    $scheduledRewards[] = $reward;
+                }
+            }
         }
+        $christmasEve = date("Y") . "-12-24";
+        $firstDecember = date("Y") . "-12-01";
         $roles=$this->getUser()?$this->getUser()->getRoles():[];
         return $this->render('home/index.html.twig', [
             'roles' => $roles,
-            'students' => $students
+            'students' => $eligibleStudents,
+            'scheduled_rewards'=>$scheduledRewards,
+            'end_date'=>$christmasEve,
+            'start_date'=>$firstDecember,
         ]);
     }
 }

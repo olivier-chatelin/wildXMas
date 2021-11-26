@@ -1,13 +1,12 @@
     <div class="reward  m-1 draggable {{ size|default('small') }}" draggable="true"
          data-id={{ reward.id }}} >
-        {% if  display_tags %}
+        {% if  display_tags|default(false) %}
             <div class="legend ">
                     <span id="goodTag" class={{ reward.isGood?"goodTag":"evilTag" }}></span>
                     <span id="remoteTag" class={{ reward.isRemoteFriendly?"remoteTag":"presenceTag" }}></span>
                     <span id="languageTag" class={{ reward.isFrench?"frenchTag":"englishTag" }}></span>
             </div>
-        {% endif %}
-        {% if not display_tags %}
+        {% else %}
         <h5 class="reward-date m-1">{{ reward.scheduledAt?reward.scheduledAt|date("l F \\t\\h\\e d")|trans}}</h5>
         {% endif %}
         <h5 class="reward-date m-1"></h5>
