@@ -22,7 +22,7 @@
             </div>
             <div class="btn btn-lg btn-success text-white" id="spinTrigger">SPIN</div>
             {% for student in students %}
-                <div class="student " data-name={{ student.firstname }}.{{ student.lastname|first }} data-id={{ student.id }}></div>
+                <div class="student " data-name={{ student.displayName }} data-id={{ student.id }}></div>
             {% endfor %}
         </div>
         {% include 'components/_calendar.html.twig' %}

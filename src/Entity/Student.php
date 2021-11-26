@@ -45,6 +45,11 @@ class Student
      */
     private $instructor;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $displayName;
+
     public function __construct()
     {
         $this->rewards = new ArrayCollection();
@@ -123,6 +128,18 @@ class Student
     public function setInstructor(?Instructor $instructor): self
     {
         $this->instructor = $instructor;
+
+        return $this;
+    }
+
+    public function getDisplayName(): ?string
+    {
+        return $this->displayName;
+    }
+
+    public function setDisplayName(string $displayName): self
+    {
+        $this->displayName = $displayName;
 
         return $this;
     }
