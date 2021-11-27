@@ -1,4 +1,4 @@
-    <div class="reward  m-1 draggable {{ size|default('small') }}" draggable="true"
+    <div class="reward  m-1 draggable position-relative {{ size|default('small') }}" draggable="true"
          data-id={{ reward.id }}} >
         {% if  display_tags|default(false) %}
             <div class="legend ">
@@ -12,4 +12,8 @@
         <h5 class="reward-date m-1"></h5>
         <div id="reward-img" class="reward-img" style="background-image: url({{ reward.url }})"></div>
         <span id="reward-title" class="reward-title m-1">{{ reward.title|upper }}</span>
+        {% if curtains|default(false) %}
+        <div class="curtain position-absolute ">{{ reward.scheduledAt|date('d')}}</div>
+        {% endif %}
     </div>
+

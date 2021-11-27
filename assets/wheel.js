@@ -23,16 +23,16 @@ let w = canvas.width / 2
 for (let i = 0; i < labels.length; i++) {
     switch (i % 4) {
         case 0:
-            color = '#04A334';
+            color = '#F76c6c';
             break;
         case 1:
-            color = '#037523';
+            color = '#3b424e';
             break;
         case 2:
-            color = '#A60932';
+            color = '#f99797';
             break;
         case 3:
-            color = '#E0AA3E';
+            color = '#c8c8c8';
             break;
     }
     ctx.fillStyle = color;
@@ -40,7 +40,7 @@ for (let i = 0; i < labels.length; i++) {
     ctx.moveTo(w,w);
     ctx.arc(w , w, w, sumAngles,sumAngles + sectionAngle,false);
     ctx.fill();
-    ctx.fillStyle ='black';
+    ctx.fillStyle ='white';
     ctx.font = "25px Arial";
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
@@ -60,8 +60,7 @@ spinButton.addEventListener('click',()=>{
     canvas.style.transition ="transform 6s";
     canvas.style.animationTimingFunction = "ease-in-out";
     setTimeout(()=>{
-        let firstname = labels[index].split('.')[0];
-        modalBody.innerHTML=`Congrats ${firstname}, let's see what you earn today `;
+        modalBody.innerHTML=`Congrats ${labels[index]}, let's see what you earn today `;
         myModal.show();
         setTimeout(()=>{
             myModal.hide();

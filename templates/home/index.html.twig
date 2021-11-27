@@ -12,6 +12,7 @@
     {#    wheel#}
     <div class="container-fluid d-flex">
         <div class="w-50">
+            <div class="btn btn-lg btn-success text-white" id="spinTrigger">SPIN</div>
             <div class="d-flex align-items-center m-5 ">
                 {% if app.user %}
                 <canvas id="can" ></canvas>
@@ -20,7 +21,6 @@
                 <h2>No Student, no wheel</h2>
                 {% endif %}
             </div>
-            <div class="btn btn-lg btn-success text-white" id="spinTrigger">SPIN</div>
             {% for student in students %}
                 <div class="student " data-name={{ student.displayName }} data-id={{ student.id }}></div>
             {% endfor %}

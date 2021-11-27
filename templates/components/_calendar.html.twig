@@ -1,6 +1,7 @@
 <div class="w-50  date-container d-flex flex-wrap">
     {% for i in range(start_date|date('U'), end_date|date('U'), 86400 ) %}
-        <div class="reward-target  dropzone m-1" data-date={{ i|date('Y-m-d') }}>
+        <div class="reward-target  position-relative dropzone m-1" data-date={{ i|date('Y-m-d') }}>
+            <div class="position-absolute week-end"></div>
             <div class="border landing ">
                 <h5 class="date-title text-center" >{{ i|date('l d') }}</h5>
             </div>

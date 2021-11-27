@@ -16,7 +16,6 @@ class HomeController extends AbstractController
     {
 
         $eligibleStudents = [];
-        $studentDisplayName = [];
         $scheduledRewards = [];
         if($this->getUser()) {
             $allStudents = $this->getUser()->getStudents();
@@ -41,6 +40,8 @@ class HomeController extends AbstractController
             'scheduled_rewards'=>$scheduledRewards,
             'end_date'=>$christmasEve,
             'start_date'=>$firstDecember,
+            'curtains' => true
+
         ]);
     }
 }

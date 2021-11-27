@@ -3,7 +3,7 @@ $theme-colors: (
         "gold": #E0AA3E,
         "xMas":  #C30F16,
         "danger":#dc3545 ,
-        "success":#20c997
+        "success":#3b424e
 
 );
 $btn-active-bg-shade-amount: 50%;
@@ -24,5 +24,7 @@ $component-active-bg: #FC686D;
 }
 body{
   //background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/christmas-background-design-of-pine-tree-and-mountain-with-snow-natee-srisuk.jpg");
+
+  background-image: url("../images/backg.jpg");
   background-size: cover;
 }

@@ -86,4 +86,32 @@
 .evilTag{
   background-image: url("../images/evil.png");
 }
+.curtain{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0f6149;
+  z-index: 5;
+  background-image: url("../images/gift2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color:white;
+  font-size: 20px;
+}
+.week-end {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0f6149;
+  z-index: 4;
+  background-image: url("../images/we.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color:white;
+  font-size: 20px;
+}
 
