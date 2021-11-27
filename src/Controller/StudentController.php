@@ -7,6 +7,7 @@ use App\Entity\Student;
 use App\Form\CsvFileType;
 use App\Form\StudentType;
 use App\Repository\StudentRepository;
+use App\Service\DisplayNameBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,26 +60,8 @@ class StudentController extends AbstractController
                         $student->setLastname($row[$KeyLastname]);
                         $student->setEmail($row[$keyEmail]);
                         $student->setInstructor($this->getUser());
-                        $otherStudent = $studentRepository->findOneBy(['firstname'=>$student->getFirstname()]);
-                        if($otherStudent) {
-                            $lettersNewStudentLastname = str_split($student->getLastname());
-                            $lettersOtherStudentLastname = str_split($otherStudent->getLastname());
-                            $maxIteration = min(count($lettersNewStudentLastname), count($lettersOtherStudentLastname));
-                            $extraNewName = $lettersNewStudentLastname[0];
-                            $extraOtherName = $lettersOtherStudentLastname[0];
-                            $i = 1;
-                            while($lettersOtherStudentLastname[$i] === $lettersNewStudentLastname[$i] && $i <= $maxIteration) {
-                                $extraNewName .= $lettersNewStudentLastname[$i];
-                                $extraOtherName .= $lettersOtherStudentLastname[$i];
-                                $i++;
-                            }
-                            $extraNewName .= $lettersNewStudentLastname[$i];
-                            $extraOtherName .= $lettersOtherStudentLastname[$i];
-                            $otherStudent->setDisplayName($otherStudent->getFirstname() . "." .$extraOtherName);
-                            $student->setDisplayName($student->getFirstname() . "." .$extraNewName);
-                        } else {
-                            $student->setDisplayName($student->getFirstname());
-                        }
+                        $displayNameBuilder = new DisplayNameBuilder($studentRepository);
+                        $displayNameBuilder->create($student);
                         $entityManager->persist($student);
                     }
                     $entityManager->flush();
@@ -104,26 +87,8 @@ class StudentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $otherStudent = $studentRepository->findOneBy(['firstname'=>$student->getFirstname()]);
-            if($otherStudent) {
-                $lettersNewStudentLastname = str_split($student->getLastname());
-                $lettersOtherStudentLastname = str_split($otherStudent->getLastname());
-                $maxIteration = min(count($lettersNewStudentLastname), count($lettersOtherStudentLastname));
-                $extraNewName = $lettersNewStudentLastname[0];
-                $extraOtherName = $lettersOtherStudentLastname[0];
-                $i = 1;
-                while($lettersOtherStudentLastname[$i] === $lettersNewStudentLastname[$i] && $i <= $maxIteration) {
-                    $extraNewName .= $lettersNewStudentLastname[$i];
-                    $extraOtherName .= $lettersOtherStudentLastname[$i];
-                    $i++;
-                }
-                    $extraNewName .= $lettersNewStudentLastname[$i];
-                    $extraOtherName .= $lettersOtherStudentLastname[$i];
-                $otherStudent->setDisplayName($otherStudent->getFirstname() . "." .$extraOtherName);
-                $student->setDisplayName($student->getFirstname() . "." .$extraNewName);
-            } else {
-                $student->setDisplayName($student->getFirstname());
-            }
+            $displayNameBuilder = new DisplayNameBuilder($studentRepository);
+            $displayNameBuilder->create($student);
             $student->setInstructor($this->getUser());
             $entityManager->persist($student);
             $entityManager->flush();

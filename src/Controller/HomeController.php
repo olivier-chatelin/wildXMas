@@ -12,7 +12,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(StudentRepository $studentRepository): Response
+    public function index(): Response
     {
 
         $eligibleStudents = [];
