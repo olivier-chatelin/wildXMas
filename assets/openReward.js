@@ -7,7 +7,10 @@ const rewards = document.getElementsByClassName('reward');
 const resetOne = document.getElementById('resetOneModal');
 const resetOneBody = document.getElementById('reset-one-modal-body');
 const resetOneFooter = document.getElementById('reset-one-modal-footer');
+const resetAllButton = document.getElementById('resetAllButton');
+const resetAll = document.getElementById('resetAllModal');
 let resetOneModal = new Modal(resetOne);
+let resetAllModal = new Modal(resetAll);
 
 let autoOpen = autoOpenInput.checked;
 autoOpenInput.addEventListener('change',()=>{
@@ -21,7 +24,6 @@ for (let curtain of curtains) {
         }
     })
 }
-console.log(rewards)
 for (let reward of rewards) {
     reward.addEventListener('click',()=>{
         resetOneBody.innerHTML="Are you sure to reset this reward?"
@@ -34,3 +36,6 @@ for (let reward of rewards) {
 
     })
 }
+resetAllButton.addEventListener('click',()=>{
+    resetAllModal.show();
+})

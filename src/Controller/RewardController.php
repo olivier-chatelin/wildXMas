@@ -167,4 +167,18 @@ class RewardController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('home');
     }
+    /**
+     * @Route("/rewards/resetAll}", name="rewards_reset_all")
+     */
+    public function resetAll(EntityManagerInterface $entityManager): Response
+    {
+        foreach ($this->getUser()->getStudents() as $student) {
+            foreach ($student->getRewards() as $reward) {
+                $student->removeReward($reward);
+            }
+        }
+        $entityManager->flush();
+        return $this->redirectToRoute('home');
+
+    }
 }

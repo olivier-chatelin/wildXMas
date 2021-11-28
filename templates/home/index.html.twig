@@ -13,6 +13,9 @@
     {#    wheel#}
     <div class="container-fluid d-flex">
         <div class="w-50">
+            <div  class="btn btn-lg btn-xMas m-1" id="resetAllButton">
+                Reset all rewards
+            </div>
             <div class="btn btn-lg btn-primary text-white m-1" id="spinTrigger">SPIN</div>
             <div class="form-check form-switch" id="switch-container">
                 <label class="form-check-label" for="auto-open">Reward Auto Open</label>
@@ -48,13 +51,23 @@
     <div id="resetOneModal" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body" id="reset-one-modal-body">
                 </div>
                 <div class="modal-footer" id="reset-one-modal-footer">
                     <a  class="btn btn-primary"  href={{ path('home') }}>Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="resetAllModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="reset-all-modal-body">
+                    Are you sure to reset all rewards?
+                </div>
+                <div class="modal-footer" id="reset-all-modal-footer">
+                    <a  class="btn btn-primary"  data-bs-dismiss="modal" href={{ path('home') }}>Close</a>
+                    <a  class="btn btn-xMas"  href={{ path('rewards_reset_all') }}>Yes reset all</a>
                 </div>
             </div>
         </div>
