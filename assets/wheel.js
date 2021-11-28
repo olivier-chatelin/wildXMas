@@ -1,13 +1,22 @@
 import {Modal} from 'bootstrap'
 const canvas = document.getElementById("can");
-const nameModal = document.getElementById('nameModal');console.log(nameModal)
+const nameModal = document.getElementById('nameModal');
 const spinButton = document.getElementById('spinTrigger');
-const winner = document.getElementById('winner');
 const studentsDiv = document.getElementsByClassName('student');
 const modalBody = document.getElementById('modal-body');
+const curtains = document.getElementsByClassName('curtain');
+const autoOpenInput = document.getElementById('auto-open');
+let autoOpen = autoOpenInput.checked;
+autoOpenInput.addEventListener('change',()=>{
+    autoOpen = autoOpenInput.checked;
+})
+
 let myModal = new Modal(nameModal)
 let color = "";
 let labels = [];
+let rewardFound = false;
+
+console.log(autoOpen)
 
 for (const studentDiv of studentsDiv) {
     labels.push(studentDiv.dataset.name);
@@ -23,7 +32,7 @@ let w = canvas.width / 2
 for (let i = 0; i < labels.length; i++) {
     switch (i % 4) {
         case 0:
-            color = '#F76c6c';
+            color = '#991108';
             break;
         case 1:
             color = '#3b424e';
@@ -32,7 +41,7 @@ for (let i = 0; i < labels.length; i++) {
             color = '#f99797';
             break;
         case 3:
-            color = '#c8c8c8';
+            color = '#F76c6c';
             break;
     }
     ctx.fillStyle = color;
@@ -60,10 +69,39 @@ spinButton.addEventListener('click',()=>{
     canvas.style.transition ="transform 6s";
     canvas.style.animationTimingFunction = "ease-in-out";
     setTimeout(()=>{
-        modalBody.innerHTML=`Congrats ${labels[index]}, let's see what you earn today `;
+        let winner = labels[index]
+        modalBody.innerHTML=`Congrats ${winner}, let's see what you earn today `;
+        for (const studentDiv of studentsDiv) {
+            if(studentDiv.dataset.name === winner) {
+                modalBody.dataset.winner = studentDiv.dataset.id;
+            }
+        }
         myModal.show();
         setTimeout(()=>{
             myModal.hide();
+            if(autoOpen) {
+
+                let date = new Date('2021-12-10');
+                let today = date.getFullYear() + '-' + (date.getMonth()+1) .toString().padStart(2,'0') + '-' + date.getDate().toString().padStart(2,'0');
+                    console.log('today',today)
+                for (let curtain of curtains) {
+                console.log(curtain.dataset.date);
+                    if(today === curtain.dataset.date) {
+                        rewardFound = true;
+                        location.href = 'rewards/show/' + curtain.dataset.id + '/students/' +  modalBody.dataset.winner;
+
+                    }
+                }
+                if (!rewardFound) {
+                    modalBody.innerHTML = "No reward found for today";
+                    myModal.show();
+                    setTimeout(()=>{
+                        // location.href='/';
+                        myModal.hide();
+
+                    },2000)
+                }
+            }
         },3000)
     },6000)
 })

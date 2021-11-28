@@ -6,6 +6,7 @@ use App\Entity\AvailableDays;
 use App\Entity\DefaultReward;
 use App\Entity\Instructor;
 use App\Entity\Reward;
+use App\Entity\Student;
 use App\Form\AvailableDatesFormType;
 use App\Form\RewardType;
 use App\Repository\DefaultRewardRepository;
@@ -138,6 +139,22 @@ class RewardController extends AbstractController
         }
 
         return $this->redirectToRoute('rewards', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/rewards/show/{reward}/students/{student}", name="reward_show")
+     */
+    public function show(Reward $reward, Student $student, EntityManagerInterface $entityManager): Response
+    {
+        $reward->addStudent($student);
+        $entityManager->flush();
+
+        return $this->render('reward/show.html.twig',[
+           'winner' => $student,
+            'reward'=>$reward,
+            'display_tags' => false,
+            'size'=>'large'
+
+        ]);
     }
 
 }

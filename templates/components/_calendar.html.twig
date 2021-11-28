@@ -1,15 +1,17 @@
 <div class="w-50  date-container d-flex flex-wrap">
     {% for i in range(start_date|date('U'), end_date|date('U'), 86400 ) %}
         <div class="reward-target  position-relative dropzone m-1" data-date={{ i|date('Y-m-d') }}>
-            <div class="position-absolute week-end"></div>
-            <div class="border landing ">
-                <h5 class="date-title text-center" >{{ i|date('l d') }}</h5>
-            </div>
+            {% include('components/_dayOff.html.twig') %}
             {% for reward in scheduled_rewards %}
                 {% if reward.scheduledAt|date('Y-m-d') == i|date('Y-m-d') %}
-                    {%    include ('components/_reward.html.twig')%}
+                    {% if not mode_curtain|default(false) or reward.students|length>0 %}
+                        {%    include ('components/_reward.html.twig')%}
+                    {% else %}
+                        {% include('components/_curtain.html.twig') %}
+                    {% endif%}
                 {% endif %}
             {% endfor %}
+              {% include('components/_dayOff.html.twig') %}
         </div>
     {% endfor %}
     <div class="d-flex flex-column">

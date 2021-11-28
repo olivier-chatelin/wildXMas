@@ -1,19 +1,20 @@
-    <div class="reward  m-1 draggable position-relative {{ size|default('small') }}" draggable="true"
-         data-id={{ reward.id }}} >
-        {% if  display_tags|default(false) %}
-            <div class="legend ">
-                    <span id="goodTag" class={{ reward.isGood?"goodTag":"evilTag" }}></span>
-                    <span id="remoteTag" class={{ reward.isRemoteFriendly?"remoteTag":"presenceTag" }}></span>
-                    <span id="languageTag" class={{ reward.isFrench?"frenchTag":"englishTag" }}></span>
-            </div>
-        {% else %}
-        <h5 class="reward-date m-1">{{ reward.scheduledAt?reward.scheduledAt|date("l F \\t\\h\\e d")|trans}}</h5>
-        {% endif %}
-        <h5 class="reward-date m-1"></h5>
-        <div id="reward-img" class="reward-img" style="background-image: url({{ reward.url }})"></div>
-        <span id="reward-title" class="reward-title m-1">{{ reward.title|upper }}</span>
-        {% if curtains|default(false) %}
-        <div class="curtain position-absolute ">{{ reward.scheduledAt|date('d')}}</div>
-        {% endif %}
+    <div class="reward   m-1 draggable position-relative {{ size|default('small') }}" draggable="true"
+         data-id={{ reward.id }} data-date={{ reward.scheduledAt|date('Y-m-d') }}>
+            {% if  display_tags|default(false) %}
+                <div class="legend ">
+                        <span id="goodTag" class={{ reward.isGood?"goodTag":"evilTag" }}></span>
+                        <span id="remoteTag" class={{ reward.isRemoteFriendly?"remoteTag":"presenceTag" }}></span>
+                        <span id="languageTag" class={{ reward.isFrench?"frenchTag":"englishTag" }}></span>
+                </div>
+            {% else %}
+            <h5 class="reward-date m-1">{{ reward.scheduledAt?reward.scheduledAt|date("l d")|trans}}</h5>
+            {% endif %}
+            <div id="reward-img" class="reward-img" style="background-image: url({{ reward.url }})"></div>
+            <span id="reward-title" class="reward-title m-1">{{ reward.title|upper }}</span>
+            {% if display_owner|default(false) %}
+            {%  for student in reward.students %}
+                <p>{{ student.displayName}}</p>
+            {% endfor %}
+            {% endif %}
     </div>
 

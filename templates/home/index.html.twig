@@ -4,6 +4,7 @@
   {% block javascripts %}
       {{ parent() }}
       {{ encore_entry_script_tags('wheel') }}
+      {{ encore_entry_script_tags('open') }}
   {% endblock %}
 {% block body %}
     {% include 'components/_header.html.twig' %}
@@ -13,6 +14,10 @@
     <div class="container-fluid d-flex">
         <div class="w-50">
             <div class="btn btn-lg btn-success text-white" id="spinTrigger">SPIN</div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="auto-open" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Auto Open</label>
+            </div>
             <div class="d-flex align-items-center m-5 ">
                 {% if app.user %}
                 <canvas id="can" ></canvas>
@@ -25,7 +30,7 @@
                 <div class="student " data-name={{ student.displayName }} data-id={{ student.id }}></div>
             {% endfor %}
         </div>
-        {% include 'components/_calendar.html.twig' %}
+        {{  include ('components/_calendar.html.twig',{'mode_curtain':true}) }}
     </div>
     <div id="nameModal" class="modal" tabindex="-1">
         <div class="modal-dialog">

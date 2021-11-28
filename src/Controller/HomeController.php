@@ -20,7 +20,6 @@ class HomeController extends AbstractController
         if($this->getUser()) {
             $allStudents = $this->getUser()->getStudents();
             foreach ($allStudents as $student) {
-                dump(count($student->getRewards()));
                 if(count($student->getRewards()) === 0) {
                     $eligibleStudents[] = $student;
                 }
@@ -40,7 +39,8 @@ class HomeController extends AbstractController
             'scheduled_rewards'=>$scheduledRewards,
             'end_date'=>$christmasEve,
             'start_date'=>$firstDecember,
-            'curtains' => true
+            'curtains' => true,
+            'display_owner' => true
 
         ]);
     }

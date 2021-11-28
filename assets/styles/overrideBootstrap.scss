@@ -23,8 +23,8 @@ $component-active-bg: #FC686D;
 
 }
 body{
-  //background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/christmas-background-design-of-pine-tree-and-mountain-with-snow-natee-srisuk.jpg");
-
+  min-height: 100vh;
   background-image: url("../images/backg.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
 }
