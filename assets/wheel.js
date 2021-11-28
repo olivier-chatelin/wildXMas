@@ -109,7 +109,7 @@ function endSpin(winner){
                         location.href='/';
                         myModal.hide();
 
-                    },3000)
+                    },2000)
                 }
             }
         },2000)

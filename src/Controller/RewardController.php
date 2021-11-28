@@ -156,5 +156,15 @@ class RewardController extends AbstractController
 
         ]);
     }
-
+    /**
+     * @Route("/rewards/reset/{reward}", name="reward_reset_one")
+     */
+    public function resetOne(Reward $reward, EntityManagerInterface $entityManager): Response
+    {
+        foreach ($reward->getStudents() as $student) {
+            $reward->removeStudent($student);
+        }
+        $entityManager->flush();
+        return $this->redirectToRoute('home');
+    }
 }
