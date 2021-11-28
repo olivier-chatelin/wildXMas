@@ -33,8 +33,8 @@ if(labels.length === 1) {
     let sumAngles = 0;
     let rand = Math.floor(Math.random()*100 + 20 );
     let randAngle = rand % (2 * Math.PI);
-    canvas.width = window.innerWidth/2.6;
-    canvas.height = window.innerWidth/2.6;
+    canvas.width = window.innerWidth/2.75;
+    canvas.height = window.innerWidth/2.75;
     let sectionAngle = 2*Math.PI/labels.length;
     let w = canvas.width / 2
     for (let i = 0; i < labels.length; i++) {
