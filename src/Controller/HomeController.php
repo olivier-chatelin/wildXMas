@@ -17,10 +17,14 @@ class HomeController extends AbstractController
 
         $eligibleStudents = [];
         $scheduledRewards = [];
+        $ownedRewardCount = [];
         if($this->getUser()) {
             $allStudents = $this->getUser()->getStudents();
             foreach ($allStudents as $student) {
-                if(count($student->getRewards()) === 0) {
+                $ownedRewardCount[] = count($student->getRewards());
+            }
+            foreach ($allStudents as $student) {
+                if(count($student->getRewards()) === min($ownedRewardCount)) {
                     $eligibleStudents[] = $student;
                 }
             }

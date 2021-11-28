@@ -3,11 +3,10 @@
 {% block title %}Edit Student{% endblock %}
 
 {% block body %}
-    <h1>Edit Student</h1>
-
-    {{ include('student/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a class="m-1 btn btn-gold text-white" href="{{ path('student_index') }}">Back to list</a>
-
-    {{ include('student/_delete_form.html.twig') }}
+    <div class="container w-25">
+        <h1>Edit Student</h1>
+        {{ include('student/_form.html.twig', {'button_label': 'Update'}) }}
+        <a class="m-1 btn btn-gold text-white" href="{{ path('student_index') }}">Back to list</a>
+        {{ include('student/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

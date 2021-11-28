@@ -115,12 +115,14 @@ class StudentController extends AbstractController
     /**
      * @Route("/{id}/edit", name="student_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Student $student, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Student $student, EntityManagerInterface $entityManager, StudentRepository $studentRepository): Response
     {
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $displayNameBuilder = new DisplayNameBuilder($studentRepository);
+            $displayNameBuilder->create($student);
             $entityManager->flush();
 
             return $this->redirectToRoute('student_index', [], Response::HTTP_SEE_OTHER);
