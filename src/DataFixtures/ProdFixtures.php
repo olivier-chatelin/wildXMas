@@ -253,7 +253,7 @@ class ProdFixtures extends Fixture
 
         $reward = new Reward();
         $reward ->setTitle('Make a cake or bring some candies')
-                ->setUrl('https://i.ibb.co/3yNHYbM/g-teau-maxi-fiesta-en-bonbons.jpg')
+                ->setUrl('https://i.ibb.co/mBjJ505/g-teau-maxi-fiesta-en-bonbons.jpg')
                 ->setIsGood(true)
                 ->setIsFrench(false)
                 ->setIsRemoteFriendly(false)

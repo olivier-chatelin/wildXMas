@@ -25,11 +25,11 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column align-items-start">
         <button class="btn  btn-primary m-1 text-white w-25" type="submit">
             Sign in
         </button>
-        <a href={{ path('app_register') }}>Let's sign up</a>
+        <a class="btn btn-success m-1 "  href={{ path('app_register') }}>Let's sign up</a>
     </div>
 </form>
     </div>

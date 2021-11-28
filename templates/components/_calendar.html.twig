@@ -15,11 +15,11 @@
         </div>
     {% endfor %}
     <div class="d-flex flex-column">
-        {% if app.user and "ROLE_ADMIN" in app.user.roles %}
-            <a href="{{ path("admin_export",{'name':'frReg'}) }}" class="btn btn-xMas m-1">Export for French regular curriculum</a>
-            <a href="{{ path("admin_export",{'name':'frRem'}) }}" class="btn btn-gold m-1 text-white">Export for French remote curriculum</a>
-            <a href="{{ path("admin_export",{'name':'eurReg'}) }}" class="btn btn-primary m-1 text-white">Export for European regular curriculum</a>
-            <a href="{{ path("admin_export",{'name':'eurRem'}) }}" class="btn btn-success m-1 text-white">Export for European remote curriculum</a>
+        {% if app.user and "ROLE_ADMIN" in app.user.roles and display_button|default(false) %}
+            <a href="{{ path("admin_export",{'name':'frReg'}) }}" class="btn btn-xMas m-3">Export for French regular curriculum</a>
+            <a href="{{ path("admin_export",{'name':'frRem'}) }}" class="btn btn-gold m-3 text-white">Export for French remote curriculum</a>
+            <a href="{{ path("admin_export",{'name':'eurReg'}) }}" class="btn btn-primary m-3 text-white">Export for European regular curriculum</a>
+            <a href="{{ path("admin_export",{'name':'eurRem'}) }}" class="btn btn-success m-3 text-white">Export for European remote curriculum</a>
         {% endif %}
     </div>
 </div>

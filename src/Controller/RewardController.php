@@ -68,6 +68,7 @@ class RewardController extends AbstractController
             'display_tags'=>true,
             'end_date'=>$christmasEve,
             'start_date'=>$firstDecember,
+            'display_button'=>true
 
         ]);
 
@@ -180,5 +181,16 @@ class RewardController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('home');
 
+    }
+    /**
+     * @Route("/rewards/unsetDates}", name="rewards_unset_dates")
+     */
+    public function unsetDates(EntityManagerInterface $entityManager): Response
+    {
+        foreach ($this->getUser()->getRewards() as $reward) {
+            $reward->setScheduledAt(null);
+        }
+        $entityManager->flush();
+       return $this->redirectToRoute('rewards');
     }
 }
