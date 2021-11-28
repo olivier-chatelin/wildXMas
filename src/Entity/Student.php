@@ -29,10 +29,6 @@ class Student
      */
     private $lastname;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $email;
 
     /**
      * @ORM\ManyToMany(targetEntity=Reward::class, inversedBy="students")
@@ -41,7 +37,7 @@ class Student
 
     /**
      * @ORM\ManyToOne(targetEntity=Instructor::class, inversedBy="students")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $instructor;
 
@@ -84,17 +80,6 @@ class Student
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Reward[]

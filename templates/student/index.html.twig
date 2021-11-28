@@ -10,6 +10,11 @@
     <h1>{{ app.user.email|split('.')[0]|capitalize}} 's students</h1>
     <a class="btn btn-success text-white m-1" href="{{ path('student_new') }}">Create new</a>
 
+    <span type="button" class="btn btn-xMas text-white m-1" data-bs-toggle="modal" data-bs-target="#deleteStudents">
+      Reset all Students
+    </span>
+
+
 
     <table class="table table-striped">
         <thead>
@@ -43,4 +48,21 @@
     <button class="btn btn-success text-white m-1">Upload</button>
     {{ form_end(form) }}
 </div>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteStudents" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure to remove all students
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary text-white" data-bs-dismiss="modal">Cancel</button>
+                    <a class="btn btn-xMas" href={{ path('students_remove_all') }}>Yes Remove all Students</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

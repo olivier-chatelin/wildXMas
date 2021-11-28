@@ -13,10 +13,12 @@
     {#    wheel#}
     <div class="container-fluid d-flex">
         <div class="w-50">
-            <div  class="btn btn-lg btn-xMas m-1" id="resetAllButton">
-                Reset all rewards
+            <div class="d-flex w-100 justify-content-between">
+                <div  class="btn btn-lg btn-xMas m-1" id="resetAllButton">
+                    Reset all rewards
+                </div>
+                <div class="btn btn-lg btn-primary text-white m-1" id="spinTrigger">SPIN</div>
             </div>
-            <div class="btn btn-lg btn-primary text-white m-1" id="spinTrigger">SPIN</div>
             <div class="form-check form-switch" id="switch-container">
                 <label class="form-check-label" for="auto-open">Reward Auto Open</label>
                 <input class="form-check-input" type="checkbox" id="auto-open" checked>
@@ -24,8 +26,8 @@
             <div class="d-flex align-items-center m-5  ">
                 {% if app.user %}
                     {% if app.user.students|length > 0 %}
-                <canvas id="can" ></canvas>
-                <div id="cursor"></div>
+                        <canvas id="can" ></canvas>
+                        <div id="cursor"></div>
                     {% else %}
                         <h2>No student, no wheel</h2>
                     {% endif %}

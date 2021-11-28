@@ -32,10 +32,10 @@ class StudentController extends AbstractController
             $this->getUser()->setCsvFile($csvFile);
             $entityManager->flush();
             $this->addFlash('success','Your file has been uploaded');
-            $students = $studentRepository->findAll();
-            foreach ($students as $student){
+            foreach ($this->getUser()->getStudents() as $student){
                 $entityManager->remove($student);
             }
+            $entityManager->flush();
             if (($fp = fopen("uploads/csv/users/" . $csvFile->getCsv(), "r"))) {
                 $line = 0;
                 while (($row = fgetcsv($fp))) {
@@ -49,30 +49,27 @@ class StudentController extends AbstractController
                                case 'lastname':
                                    $KeyLastname = $key;
                                    break;
-                               case 'wilder_email':
-                                   $keyEmail = $key;
-                                   break;
                            }
                         }
                     } else{
                         $student = new Student();
                         $student->setFirstname($row[$keyFirstname]);
                         $student->setLastname($row[$KeyLastname]);
-                        $student->setEmail($row[$keyEmail]);
                         $student->setInstructor($this->getUser());
-                        $displayNameBuilder = new DisplayNameBuilder($studentRepository);
+                        $displayNameBuilder = new DisplayNameBuilder($studentRepository, $this->getUser()->getStudents());
                         $displayNameBuilder->create($student);
                         $entityManager->persist($student);
                     }
-                    $entityManager->flush();
                 }
+                        $entityManager->persist($this->getUser());
+                    $entityManager->flush();
                 fclose($fp);
-
+                return $this->redirectToRoute('student_index');
             }
-
         }
+        $students = $this->getUser()->getStudents();
         return $this->render('student/index.html.twig', [
-            'students' => $this->getUser()->getStudents(),
+            'students' => $students,
             'form' => $form->createView(),
         ]);
     }
@@ -87,7 +84,7 @@ class StudentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $displayNameBuilder = new DisplayNameBuilder($studentRepository);
+            $displayNameBuilder = new DisplayNameBuilder($studentRepository, $this->getUser()->getStudents());
             $displayNameBuilder->create($student);
             $student->setInstructor($this->getUser());
             $entityManager->persist($student);
@@ -145,5 +142,17 @@ class StudentController extends AbstractController
         }
 
         return $this->redirectToRoute('student_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/students/remove/all", name="students_remove_all")
+     */
+    public function removeAllStudents(EntityManagerInterface $entityManager)
+    {
+        foreach ($this->getUser()->getStudents() as $student) {
+            $this->getUser()->removeStudent($student);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('student_index');
+
     }
 }
