@@ -13,7 +13,7 @@
             <span id="reward-title" class="reward-title m-1">{{ reward.title|upper }}</span>
             {% if display_owner|default(false) %}
             {%  for student in reward.students %}
-                <p>{{ student.displayName}}</p>
+                <span class="stamp">{{ student.displayName}}</span>
             {% endfor %}
             {% endif %}
     </div>

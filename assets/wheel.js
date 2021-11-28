@@ -81,7 +81,7 @@ spinButton.addEventListener('click',()=>{
             myModal.hide();
             if(autoOpen) {
 
-                let date = new Date('2021-12-10');
+                let date = new Date();
                 let today = date.getFullYear() + '-' + (date.getMonth()+1) .toString().padStart(2,'0') + '-' + date.getDate().toString().padStart(2,'0');
                     console.log('today',today)
                 for (let curtain of curtains) {
@@ -96,7 +96,7 @@ spinButton.addEventListener('click',()=>{
                     modalBody.innerHTML = "No reward found for today";
                     myModal.show();
                     setTimeout(()=>{
-                        // location.href='/';
+                        location.href='/';
                         myModal.hide();
 
                     },2000)
