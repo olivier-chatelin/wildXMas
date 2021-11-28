@@ -3,7 +3,8 @@
        {{ parent() }}
        {{ encore_entry_script_tags('dynamic-input') }}
    {% endblock %}
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}{{ parent() }}-new reward{% endblock %}
+
 {% block body %}
     {% include 'components/_header.html.twig' %}
     <div class="container">

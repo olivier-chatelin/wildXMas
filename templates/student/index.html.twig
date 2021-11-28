@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-{% block title %}Student index{% endblock %}
+{% block title %}{{ parent() }}-Students{% endblock %}
+
 
 {% block body %}
     {% include 'components/_header.html.twig' %}

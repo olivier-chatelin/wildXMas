@@ -3,7 +3,8 @@
       {{ parent() }}
       {{ encore_entry_script_tags('dynamic-input') }}
   {% endblock %}
-{% block title %}Edit Reward{% endblock %}
+{% block title %}{{ parent() }}-edit Reward{% endblock %}
+
 
 {% block body %}
 {% include 'components/_header.html.twig' %}

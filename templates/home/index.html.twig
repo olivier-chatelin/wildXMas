@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}{{ parent() }}-Spin the wheel{% endblock %}
+
   {% block javascripts %}
       {{ parent() }}
       {{ encore_entry_script_tags('wheel') }}
