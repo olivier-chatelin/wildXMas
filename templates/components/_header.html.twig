@@ -11,9 +11,13 @@
                 <a class="nav-link active" href = {{ path('app_logout')}}>Hello {{ arr[0]|capitalize}}</a>
                 <a class="nav-link active" href={{ path('student_index') }}>Students</a>
                 <a class="nav-link active" href={{ path('rewards')}}>Rewards</a>
+                    {% if "ROLE_SUPER_ADMIN" in app.user.roles %}
+                    <a class="nav-link active" href={{ path('admin_instructors')}}>Set administrators</a>
+                    {% endif %}
                 {% else %}
                 <a class="nav-link active" href={{ path('app_login')}}>Sign in/Sign up</a>
                 {% endif %}
+
             </div>
         </div>
     </div>

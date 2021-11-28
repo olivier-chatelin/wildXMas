@@ -72,7 +72,7 @@ class StudentController extends AbstractController
 
         }
         return $this->render('student/index.html.twig', [
-            'students' => $studentRepository->findAll(),
+            'students' => $this->getUser()->getStudents(),
             'form' => $form->createView(),
         ]);
     }

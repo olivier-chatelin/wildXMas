@@ -20,20 +20,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
-     * @IsGranted("ROLE_ADMIN")
-     */
-    public function index(): Response
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-    /**
      * @Route("/admin/instructors", name="admin_instructors")
      */
     public function instructorsShow(InstructorRepository $instructorRepository): Response
     {
+
         $instructors = $instructorRepository->findAll();
         return $this->render('admin/instructors.html.twig', [
             'instructors' => $instructors,

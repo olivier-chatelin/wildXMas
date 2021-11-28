@@ -5,19 +5,22 @@ const spinButton = document.getElementById('spinTrigger');
 const studentsDiv = document.getElementsByClassName('student');
 const modalBody = document.getElementById('modal-body');
 const curtains = document.getElementsByClassName('curtain');
-const autoOpenInput = document.getElementById('auto-open');
 const cursor = document.getElementById('cursor');
-let autoOpen = autoOpenInput.checked;
+const autoOpenInput = document.getElementById('auto-open');
+if(window.localStorage.getItem('autoOpen') === null) {
+    window.localStorage.setItem('autoOpen', 'true')
+}
+autoOpenInput.checked = window.localStorage.getItem('autoOpen') === 'true';
 autoOpenInput.addEventListener('change',()=>{
-    autoOpen = autoOpenInput.checked;
+    window.localStorage.setItem('autoOpen', autoOpenInput.checked);
 })
+
 
 let myModal = new Modal(nameModal)
 let color = "";
 let labels = [];
 let rewardFound = false;
 
-console.log(autoOpen)
 
 for (const studentDiv of studentsDiv) {
     labels.push(studentDiv.dataset.name);
@@ -30,8 +33,8 @@ if(labels.length === 1) {
     let sumAngles = 0;
     let rand = Math.floor(Math.random()*100 + 20 );
     let randAngle = rand % (2 * Math.PI);
-    canvas.width = window.innerWidth/2.8;
-    canvas.height = window.innerWidth/2.8;
+    canvas.width = window.innerWidth/2.6;
+    canvas.height = window.innerWidth/2.6;
     let sectionAngle = 2*Math.PI/labels.length;
     let w = canvas.width / 2
     for (let i = 0; i < labels.length; i++) {
@@ -89,13 +92,10 @@ function endSpin(winner){
         myModal.show();
         setTimeout(()=>{
             myModal.hide();
-            if(autoOpen) {
-
+            if(autoOpenInput.checked) {
                 let date = new Date();
                 let today = date.getFullYear() + '-' + (date.getMonth()+1) .toString().padStart(2,'0') + '-' + date.getDate().toString().padStart(2,'0');
-                console.log('today',today)
                 for (let curtain of curtains) {
-                    console.log(curtain.dataset.date);
                     if(today === curtain.dataset.date) {
                         rewardFound = true;
                         location.href = 'rewards/show/' + curtain.dataset.id + '/students/' +  modalBody.dataset.winner;
@@ -109,7 +109,7 @@ function endSpin(winner){
                         location.href='/';
                         myModal.hide();
 
-                    },2000)
+                    },3000)
                 }
             }
         },2000)
