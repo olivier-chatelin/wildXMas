@@ -26,22 +26,26 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-            $user->setRoles(['ROLE_USER']);
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+                if(count(explode('@',$user->getEmail())) > 1  && explode('@',$user->getEmail())[1] === "wildcodeschool.com") {
+                $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+                $user->setRoles(['ROLE_USER']);
+                $entityManager->persist($user);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
 
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
+                return $userAuthenticator->authenticateUser(
+                    $user,
+                    $authenticator,
+                    $request
+                );
+            } else {
+                    $this->addFlash('danger','You are not known as an instructor');
+        }
         }
 
         return $this->render('registration/register.html.twig', [
