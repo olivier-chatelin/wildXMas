@@ -4,13 +4,17 @@
 
 {% block body %}
     {% include 'components/_header.html.twig' %}
-    <div class="container d-flex flex-wrap">
-        {% for reward in instructor.rewards %}
-            <div class="d-flex flex-column">
-                {{ include('components/_reward.html.twig',{display_tags : true}) }}
-                <a class="btn btn-success text-white m-1 w-75 align-self-center" href={{ path('other_reward_duplicate',{id:reward.id}) }}>Duplicate</a>
-            </div>
-        {% endfor %}
+    {%  set names = instructor.email|replace({"@wildcodeschool.com":''})|split('.')%}
+    <div class="container">
+        <h1 class="text-center">{{ names[0]|capitalize}}'s rewards</h1>
+        <div class="d-flex flex-wrap">
+            {% for reward in instructor.rewards %}
+                <div class="d-flex flex-column">
+                    {{ include('components/_reward.html.twig',{display_tags : true}) }}
+                    <a class="btn btn-success text-white m-1 w-75 align-self-center" href={{ path('other_reward_duplicate',{id:reward.id}) }}>Duplicate</a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}
