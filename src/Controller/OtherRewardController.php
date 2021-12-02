@@ -24,7 +24,6 @@ class OtherRewardController extends AbstractController
                 explode('@',$instructor->getEmail())[0] !== 'test2' &&
                 explode('@',$instructor->getEmail())[0] !== 'test3') {
                 $instructors[] = $instructor;
-                dump($instructor->getEmail());
             }
         }
 
