@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Instructors{% endblock %}
+
+{% block body %}
+    {% include 'components/_header.html.twig' %}
+    <div class="container w-50">
+        <table class="table table-striped text-center">
+            <tr>
+                <th>Instructor</th>
+                <th>Action</th>
+            </tr>
+            {% for instructor in instructors %}
+                <tr>
+                    <td>
+                        {%  set names = instructor.email|replace({"@wildcodeschool.com":''})|split('.')%}
+                        {{ names[0]|capitalize}}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary text-white" href={{ path('other_reward_show_all',{id:instructor.id}) }}>See Rewards</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}

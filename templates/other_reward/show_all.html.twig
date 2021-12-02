@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Instructors{% endblock %}
+
+{% block body %}
+    {% include 'components/_header.html.twig' %}
+    <div class="container d-flex flex-wrap">
+        {% for reward in instructor.rewards %}
+            <div class="d-flex flex-column">
+                {{ include('components/_reward.html.twig',{display_tags : true}) }}
+                <a class="btn btn-success text-white m-1 w-75 align-self-center" href={{ path('other_reward_duplicate',{id:reward.id}) }}>Duplicate</a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

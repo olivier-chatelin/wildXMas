@@ -11,6 +11,7 @@
                 <a class="nav-link active" href = "/">Hello {{ arr[0]|capitalize}}</a>
                 <a class="nav-link active" href={{ path('student_index') }}>Students</a>
                 <a class="nav-link active" href={{ path('rewards')}}>Rewards</a>
+                <a class="nav-link active" href={{ path('other_reward')}}>Instructor's rewards</a>
                 <a class="nav-link active" href = {{ path('app_logout')}}>Log out</a>
                     {% if "ROLE_SUPER_ADMIN" in app.user.roles %}
                     <a class="nav-link active" href={{ path('admin_instructors')}}>Set administrators</a>

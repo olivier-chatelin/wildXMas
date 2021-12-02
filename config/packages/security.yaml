@@ -41,3 +41,4 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/rewards, roles: ROLE_USER }
          - { path: ^/student, roles: ROLE_USER }
+         - { path: ^/other, roles: ROLE_USER }
