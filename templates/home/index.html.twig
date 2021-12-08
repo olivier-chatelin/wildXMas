@@ -27,7 +27,7 @@
             <div class="d-flex align-items-center m-5  ">
                 {% if app.user %}
                     {% if app.user.students|length > 0 %}
-                        <canvas id="can" ></canvas>
+                        <canvas id="can" data-user={{ user_id }}></canvas>
                         <div id="cursor"></div>
                     {% else %}
                         <h2>No student, no wheel</h2>

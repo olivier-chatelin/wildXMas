@@ -44,7 +44,8 @@ class HomeController extends AbstractController
             'end_date'=>$christmasEve,
             'start_date'=>$firstDecember,
             'curtains' => true,
-            'display_owner' => true
+            'display_owner' => true,
+            'user_id' => $this->getUser()? $this->getUser()->getId(): null
 
         ]);
     }
