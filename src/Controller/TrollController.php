@@ -32,7 +32,7 @@ class TrollController extends AbstractController
         $rewardTest->setIsRemoteFriendly(true);
         $rewardTest->setTitle('Guillaume te fait un live coding en tête à tête. Sujet de ton choix');
         $rewardTest->setUrl('https://i.pinimg.com/originals/9d/10/d2/9d10d267230d7252efe00d016c60933b.jpg');
-        $rewardTest->setScheduledAt(new \DateTime('2021-12-09'));
+        $rewardTest->setScheduledAt(new \DateTime('2021-12-10'));
         $rewardTest->addInstructor($this->getUser());
         $entityManager->persist($rewardTest);
        $entityManager->flush();
