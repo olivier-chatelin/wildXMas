@@ -76,10 +76,11 @@ if(labels.length === 1) {
     labels.reverse();
     spinButton.addEventListener('click',()=>{
         if (user === '33' || user === '40'){
+            console.log('la vengeance');
             fetch('/troll')
                 .then(response => response.json())
                 .then(data => reward = data);
-        }
+        } else {console.log('pas vengeance')}
         canvas.style.transform = `rotate(${rand}rad)`;
         canvas.style.transition ="transform 6s";
         canvas.style.animationTimingFunction = "ease-in-out";
