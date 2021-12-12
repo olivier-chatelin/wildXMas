@@ -75,11 +75,6 @@ if(labels.length === 1) {
     let index = Math.floor(randAngle  / sectionAngle)
     labels.reverse();
     spinButton.addEventListener('click',()=>{
-        if (user === '33' || user === '40'){
-            fetch('/troll')
-                .then(response => response.json())
-                .then(data => reward = data);
-        }
         canvas.style.transform = `rotate(${rand}rad)`;
         canvas.style.transition ="transform 6s";
         canvas.style.animationTimingFunction = "ease-in-out";
@@ -105,10 +100,7 @@ function endSpin(winner){
                 for (let curtain of curtains) {
                     if(today === curtain.dataset.date) {
                         rewardFound = true;
-                        if((user === "33" || user === "40") && today === "2021-12-13") {
-                            curtain.dataset.id = reward;
-                        }
-                            location.href = 'rewards/show/' + curtain.dataset.id + '/students/' +  modalBody.dataset.winner;
+                        location.href = 'rewards/show/' + curtain.dataset.id + '/students/' +  modalBody.dataset.winner;
 
                     }
                 }
