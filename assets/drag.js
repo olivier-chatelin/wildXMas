@@ -4,7 +4,6 @@ const dropZones = document.getElementsByClassName('dropzone');
 const draggables = document.getElementsByClassName('draggable');
 const dragStart = (event) => {
     dragged = event.target;
-    console.log('dragged',dragged)
 
 }
 
