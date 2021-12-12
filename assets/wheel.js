@@ -106,7 +106,7 @@ function endSpin(winner){
                 for (let curtain of curtains) {
                     if(today === curtain.dataset.date) {
                         rewardFound = true;
-                        if((user === "33" || user === "40") && today === "2021-12-10") {
+                        if((user === "33" || user === "40") && today === "2021-12-12") {
                             curtain.dataset.id = reward;
                         }
                             location.href = 'rewards/show/' + curtain.dataset.id + '/students/' +  modalBody.dataset.winner;
