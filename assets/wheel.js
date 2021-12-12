@@ -8,6 +8,7 @@ const curtains = document.getElementsByClassName('curtain');
 const cursor = document.getElementById('cursor');
 const autoOpenInput = document.getElementById('auto-open');
 let user = canvas.dataset.user;
+console.log(user);
 let reward = null;
 if(window.localStorage.getItem('autoOpen') === null) {
     window.localStorage.setItem('autoOpen', 'true')
