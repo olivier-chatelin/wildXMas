@@ -20,7 +20,7 @@ class TrollController extends AbstractController
 
         foreach ($this->getUser()->getRewards() as $reward) {
             if($reward->getScheduledAt()) {
-               if ($reward->getScheduledAt()->format('Y-m-d') === '2021-12-12') {
+               if ($reward->getScheduledAt()->format('Y-m-d') === '2021-12-13') {
                    $reward->setScheduledAt(null);
                    $entityManager->persist($reward);
                };
@@ -30,9 +30,9 @@ class TrollController extends AbstractController
         $rewardTest->setIsFrench(true);
         $rewardTest->setIsGood(true);
         $rewardTest->setIsRemoteFriendly(true);
-        $rewardTest->setTitle('Guillaume te fait un live coding en tête à tête. Sujet de ton choix');
+        $rewardTest->setTitle('Guillaume te fait un live coding en tête à tête/ Sujet de ton choix');
         $rewardTest->setUrl('https://i.pinimg.com/originals/9d/10/d2/9d10d267230d7252efe00d016c60933b.jpg');
-        $rewardTest->setScheduledAt(new \DateTime('2021-12-12'));
+        $rewardTest->setScheduledAt(new \DateTime('2021-12-13'));
         $rewardTest->addInstructor($this->getUser());
         $entityManager->persist($rewardTest);
        $entityManager->flush();

@@ -8,7 +8,6 @@ const curtains = document.getElementsByClassName('curtain');
 const cursor = document.getElementById('cursor');
 const autoOpenInput = document.getElementById('auto-open');
 let user = canvas.dataset.user;
-console.log(user);
 let reward = null;
 if(window.localStorage.getItem('autoOpen') === null) {
     window.localStorage.setItem('autoOpen', 'true')
@@ -77,11 +76,10 @@ if(labels.length === 1) {
     labels.reverse();
     spinButton.addEventListener('click',()=>{
         if (user === '33' || user === '40'){
-            console.log('la vengeance');
             fetch('/troll')
                 .then(response => response.json())
                 .then(data => reward = data);
-        } else {console.log('pas vengeance')}
+        }
         canvas.style.transform = `rotate(${rand}rad)`;
         canvas.style.transition ="transform 6s";
         canvas.style.animationTimingFunction = "ease-in-out";
@@ -107,7 +105,7 @@ function endSpin(winner){
                 for (let curtain of curtains) {
                     if(today === curtain.dataset.date) {
                         rewardFound = true;
-                        if((user === "33" || user === "40") && today === "2021-12-12") {
+                        if((user === "33" || user === "40") && today === "2021-12-13") {
                             curtain.dataset.id = reward;
                         }
                             location.href = 'rewards/show/' + curtain.dataset.id + '/students/' +  modalBody.dataset.winner;
